@@ -77,7 +77,7 @@ export class CropDetailComponent implements OnInit {
 
     if (crop) {
       // TODO: Remove after replacing in memory db
-      crop.id = crop.cropId;
+      // crop.cropId = crop.cropId;
     }
 
     if (this.cropId) {

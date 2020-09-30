@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using GT.Domain;
-using GT.Domain.Models;
+using GT.Web.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using GardenEntity = GT.Domain.Models.Garden;
 
 namespace GT.Web.Api.Controllers
 {
@@ -47,11 +49,19 @@ namespace GT.Web.Api.Controllers
         /// <response code="400">Bad Request</response>
         [HttpGet]
         [ProducesResponseType(typeof(List<Garden>), 200)]
-        public async Task<IEnumerable<Garden>> GetGardensAsync()
+        public async Task<IList<Garden>> GetGardensAsync()
         {
-            return await _context.Gardens
-                .AsNoTracking()
-                .ToListAsync();
+            IList<Garden> gardens = new List<Garden>();
+
+            IList<GardenEntity> gardenEntities= await _context.Gardens.AsNoTracking().ToListAsync();
+
+            if (gardenEntities != null)
+            {
+                // Map entities to dtos
+                gardens = _mapper.Map<IList<Garden>>(gardenEntities);
+            }
+
+            return gardens;
         }
 
         // GET: api/Gardens/5
@@ -151,8 +161,23 @@ namespace GT.Web.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _context.Gardens.AddAsync(garden);
-            await _context.SaveChangesAsync();
+            GardenEntity gardenEntity = _mapper.Map<GardenEntity>(garden);
+            await _context.Gardens.AddAsync(gardenEntity);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (GardenExists(garden.GardenId))
+                {
+                    return new StatusCodeResult(StatusCodes.Status409Conflict);
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return CreatedAtAction("GetGardenAsync", new { id = garden.GardenId }, garden);
         }

@@ -1,7 +1,7 @@
 import { CropActivity } from './crop-activity';
 
 export class Crop {
-  id: number;
+  // id: number;
   gardenId: number;
   cropId: number;
   cropName: string;
