@@ -21,14 +21,14 @@ namespace GT.Web.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add CORS
+            services.AddCors();
+
             services.AddControllers();
 
             services.AddDbContext<GardenTrackerAppContext>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("GardenTrackerAppConnection"));
             });
-
-            // Add CORS
-            services.AddCors();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             // Add Swagger
@@ -53,6 +53,15 @@ namespace GT.Web.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Enable cross origin requests
+            app.UseCors(c =>
+                {
+                    c.AllowAnyHeader();
+                    c.AllowAnyMethod();
+                    c.AllowAnyOrigin();
+                }
+            );
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -69,16 +78,6 @@ namespace GT.Web.Api
                 endpoints.MapControllers();
             });
             
-
-            // Enable cross origin requests
-            app.UseCors(c =>
-                {
-                    c.AllowAnyHeader();
-                    c.AllowAnyMethod();
-                    c.AllowAnyOrigin();
-                }
-            );
-
             // Insert middleware to expose the generated Swagger as JSON endpoint(s)
             app.UseSwagger();
 

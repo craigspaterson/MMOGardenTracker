@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-8">
+    <ng-container *ngIf="gardens && gardens.length; then hasDataTemplate; else noDataTemplate">
+    </ng-container>
+
+    <ng-template #hasDataTemplate>
+      <div>
+        <table class="table table-bordered thread-dark">
+          <thead>
+            <tr>
+              <th>Action</th>
+              <th>Garden Name</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let garden of gardens; let loopIndex = index">
+            <td style="text-align:top; padding:0; margin:0; cursor:pointer; width: 80px;">
+              <fa-icon [icon]="faEdit" style="color:black" (click)="onEditClick(garden.gardenId)"></fa-icon>&nbsp;
+              <fa-icon [icon]="faEraser" style="color:black" (click)="onDeleteClick(garden.gardenId)"></fa-icon>&nbsp;
+              <!-- <fa-icon [icon]="faSortUp" style="color:black" (click)="onAscendingSortClick(garden.gardenId)"></fa-icon>&nbsp; -->
+              <!-- <fa-icon [icon]="faSortDown" style="color:black" (click)="onDescendingSortClick(garden.gardenId)"></fa-icon> -->
+            </td>
+            <td>
+              {{garden.gardenName}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </ng-template>
+
+    <ng-template #noDataTemplate>
+      <div>
+        Loading...
+      </div>
+    </ng-template>
+  </div>
+</div>

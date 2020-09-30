@@ -1,0 +1,48 @@
+species->category (fruit, vegetable, fungus)
+format (seed, bulb, ryzome, clone)
+location
+container/plot type
+quantity
+in gound, raised bed, container, hydoponic
+
+activity 
+(
+Planting, 
+Transplanting,
+Cloning,
+Watering,
+Fertilizing,
+Weeding, 
+PestControl, 
+Thinning,
+Pruning,
+Harvesting
+)
+date
+calendar
+
+plan
+costs
+yields
+
+
+User has Locations (nice to have)
+Locations have Gardens (nice to have)
+Gardens have Crops over time
+Crops are groups of Plants that undergo Activities
+the Activities incur costs, time, and Supplies
+to produce a Yield
+
+May also have Events, similar to Activities
+
+
+firebase.google.com
+
+Side Nav
+--------
+Locations
+Gardens
+Crops
+Inventory
+Reports
+
