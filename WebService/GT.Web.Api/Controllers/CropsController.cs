@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GT.Domain.Repositories;
+using GT.Domain.Repositories.Interfaces;
 using CropEntity = GT.Domain.Models.Crop;
 
 namespace GT.Web.Api.Controllers
@@ -48,9 +50,10 @@ namespace GT.Web.Api.Controllers
         [HttpGet]
         public async Task<IList<Crop>> GetCropsAsync()
         {
-            IList<Crop> crops = new List<Crop>();
+            ICropRepository cropRepository = new CropRepository(_context);
+            IEnumerable<CropEntity> cropEntities = await cropRepository.GetCropsAsync();
 
-            IList<CropEntity> cropEntities= await _context.Crops.AsNoTracking().ToListAsync();
+            IList<Crop> crops = new List<Crop>();
 
             if (cropEntities != null)
             {
@@ -74,9 +77,15 @@ namespace GT.Web.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
+            if (id == 0)
+            {
+                return BadRequest("The cropId is required.");
+            }
 
             Crop cropDto;
-            CropEntity cropEntity = await _context.Crops.FindAsync(id);
+            ICropRepository cropRepository = new CropRepository(_context);
+
+            CropEntity cropEntity = await cropRepository.GetCropAsync(id);
 
             if (cropEntity != null)
             {

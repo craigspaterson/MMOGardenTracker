@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GT.Domain.Repositories;
+using GT.Domain.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using GardenEntity = GT.Domain.Models.Garden;
 
@@ -51,9 +53,10 @@ namespace GT.Web.Api.Controllers
         [ProducesResponseType(typeof(List<Garden>), 200)]
         public async Task<IList<Garden>> GetGardensAsync()
         {
-            IList<Garden> gardens = new List<Garden>();
+            IGardenRepository gardenRepository = new GardenRepository(_context);
+            IEnumerable<GardenEntity> gardenEntities = await gardenRepository.GetGardensAsync();
 
-            IList<GardenEntity> gardenEntities= await _context.Gardens.AsNoTracking().ToListAsync();
+            IList<Garden> gardens = new List<Garden>();
 
             if (gardenEntities != null)
             {
@@ -87,19 +90,22 @@ namespace GT.Web.Api.Controllers
                 return BadRequest("The gardenId is required.");
             }
 
-            var garden = await _context.Gardens.FindAsync(id);
+            Garden gardenDto;
+            IGardenRepository cropRepository = new GardenRepository(_context);
 
-            //var garden = await _context.Gardens
-            //    .Include(x => x.Crops)
-            //    .AsNoTracking()
-            //    .SingleAsync(x => x.GardenId == id);
+            GardenEntity cropEntity = await cropRepository.GetGardenAsync(id);
 
-            if (garden == null)
+            if (cropEntity != null)
+            {
+                // Map entity to dto
+                gardenDto = _mapper.Map<Garden>(cropEntity);
+            }
+            else
             {
                 return NotFound();
             }
-
-            return Ok(garden);
+            
+            return Ok(gardenDto);
         }
 
         // PUT: api/Gardens/5
