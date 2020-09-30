@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-8">
+    <p>
+      <a routerLink="/crops/crop/new" class="btn btn-primary">Add Crop</a>
+    </p>
+
+    <ng-container *ngIf="crops && crops.length; then hasDataTemplate; else noDataTemplate">
+    </ng-container>
+
+    <ng-template #hasDataTemplate>
+      <div>
+        <table class="table table-bordered thread-dark">
+          <thead>
+            <tr>
+              <th>Action</th>
+              <th>Crop Name</th>
+              <th>Plant Name</th>
+              <th>Begin Date</th>
+              <th>End Date</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let crop of crops; let loopIndex = index">
+            <td style="text-align:top; padding:0; margin:0; cursor:pointer; width: 80px;">
+              <fa-icon [icon]="faEdit" style="color:black" (click)="onEditClick(crop.cropId)"></fa-icon>&nbsp;
+              <fa-icon [icon]="faEraser" style="color:black" (click)="onDeleteClick(crop.cropId)"></fa-icon>&nbsp;
+              <!-- <fa-icon [icon]="faSortUp" style="color:black" (click)="onAscendingSortClick(crop.cropId)"></fa-icon>&nbsp; -->
+              <!-- <fa-icon [icon]="faSortDown" style="color:black" (click)="onDescendingSortClick(crop.cropId)"></fa-icon> -->
+            </td>
+            <td>
+              {{crop.cropName}}
+            </td>
+            <td>
+              {{crop.plantName}}
+            </td>
+            <td>
+              {{crop.beginDate | date:'shortDate'}}
+            </td>
+            <td>
+              {{crop.endDate | date:'shortDate'}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </ng-template>
+
+    <ng-template #noDataTemplate>
+      <div>
+        Loading...
+      </div>
+    </ng-template>
+  </div>
+</div>

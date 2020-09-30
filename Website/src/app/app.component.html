@@ -1,0 +1,36 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">{{title}}</h1>
+    <p class="lead">Track all of your gardens, crops, and activities with {{title}}.</p>
+  </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    <fa-icon [icon]="faLeaf" style="color:lime"></fa-icon> </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" routerLink="/dashboard">Dashboard
+        <span class="sr-only">(current)</span>
+      </a>
+      <a class="nav-item nav-link" routerLink="/gardens">Gardens</a>
+      <a class="nav-item nav-link" routerLink="/crops">Crops</a>
+    </div>
+  </div>
+</nav>
+
+<!-- <div style="text-align:center">
+  <fa-icon [icon]="faCoffee"></fa-icon>
+</div> -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-11">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

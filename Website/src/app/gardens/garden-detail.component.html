@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-8">
+    <div *ngIf="garden as garden; else loading">
+      <div>
+        <span>Garden Id: </span>{{garden.id}}</div>
+      <div>
+        <label>Garden Name:
+          <input [(ngModel)]="garden.gardenName" placeholder="Garden Name">
+        </label>
+      </div>
+      <p>
+        <button class="btn btn-secondary" type="button" (click)="gotoGardens()">Back</button>
+      </p>
+    </div>
+
+    <ng-template #loading>
+      Loading...
+    </ng-template>
+  </div>
+</div>

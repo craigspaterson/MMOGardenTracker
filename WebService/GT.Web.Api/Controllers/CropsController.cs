@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
 using GT.Domain;
-using GT.Domain.Models;
+using GT.Web.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GT.Domain.Repositories;
+using GT.Domain.Repositories.Interfaces;
+using CropEntity = GT.Domain.Models.Crop;
 
 namespace GT.Web.Api.Controllers
 {
@@ -45,11 +48,20 @@ namespace GT.Web.Api.Controllers
         /// </summary>
         /// <returns>IEnumerable&lt;Crop&gt;.</returns>
         [HttpGet]
-        public async Task<IEnumerable<Crop>> GetCropsAsync()
+        public async Task<IList<Crop>> GetCropsAsync()
         {
-            return await _context.Crops
-                .AsNoTracking()
-                .ToListAsync();
+            ICropRepository cropRepository = new CropRepository(_context);
+            IEnumerable<CropEntity> cropEntities = await cropRepository.GetCropsAsync();
+
+            IList<Crop> crops = new List<Crop>();
+
+            if (cropEntities != null)
+            {
+                // Map entities to dtos
+                crops = _mapper.Map<IList<Crop>>(cropEntities);
+            }
+
+            return crops;
         }
 
         // GET: api/Crops/5
@@ -65,15 +77,27 @@ namespace GT.Web.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
+            if (id == 0)
+            {
+                return BadRequest("The cropId is required.");
+            }
 
-            var crop = await _context.Crops.FindAsync(id);
+            Crop cropDto;
+            ICropRepository cropRepository = new CropRepository(_context);
 
-            if (crop == null)
+            CropEntity cropEntity = await cropRepository.GetCropAsync(id);
+
+            if (cropEntity != null)
+            {
+                // Map entity to dto
+                cropDto = _mapper.Map<Crop>(cropEntity);
+            }
+            else
             {
                 return NotFound();
             }
-
-            return Ok(crop);
+            
+            return Ok(cropDto);
         }
 
         // PUT: api/Crops/5
@@ -131,7 +155,8 @@ namespace GT.Web.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Crops.Add(crop);
+            CropEntity cropEntity = _mapper.Map<CropEntity>(crop);
+            await _context.Crops.AddAsync(cropEntity);
             try
             {
                 await _context.SaveChangesAsync();

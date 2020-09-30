@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-8">
+    <!-- <div *ngIf="crop as crop; else loading"> -->
+    <form #f="ngForm" (ngSubmit)="saveCrop(f.value)">
+      <div class="form-group">
+        <label for="gardenId">Garden</label>
+        <select id="gardenId" name="gardenId" #gardenId="ngModel" [(ngModel)]="crop.gardenId">
+          <option value=""></option>
+          <option *ngFor="let garden of gardens" [value]="garden.gardenId">
+            {{garden.gardenName}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="cropId">Crop Id</label>
+        <input id="cropId" name="cropId" type="text" class="form-control" #cropId="ngModel" [(ngModel)]="crop.cropId" placeholder="Crop Id"
+          readonly>
+      </div>
+      <div class="form-group">
+        <label for="cropName">Crop Name</label>
+        <input id="cropName" name="cropName" type="text" class="form-control" #cropName="ngModel" [(ngModel)]="crop.cropName" placeholder="Crop Name"
+          required>
+      </div>
+      <div class="form-group">
+        <label for="plantName">Plant Name</label>
+        <input id="plantName" name="plantName" type="text" class="form-control" #plantName="ngModel" [(ngModel)]="crop.plantName"
+          placeholder="Plant Name" required>
+      </div>
+      <div class="form-group">
+        <label for="beginDate">Begin Date</label>
+        <input id="beginDate" name="beginDate" type="text" placeholder="Datepicker" class="form-control" #beginDate="ngModel" [(ngModel)]="crop.beginDate"
+          bsDatepicker required>
+      </div>
+      <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input id="endDate" name="endDate" type="text" placeholder="Datepicker" class="form-control" #endDate="ngModel" [(ngModel)]="crop.endDate"
+          bsDatepicker>
+      </div>
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <input id="notes" name="notes" type="text" class="form-control" #notes="ngModel" [(ngModel)]="crop.notes">
+      </div>
+
+      <!-- cropActivities: CropActivity[]; -->
+      <button class="btn btn-primary" id="submit" name="submit" type="submit" value="Submit">Submit</button>&nbsp;
+      <button class="btn btn-secondary" type="button" (click)="gotoCrops()">Back</button>
+
+    </form>
+    <!-- </div> -->
+
+    <ng-template #loading>
+      Loading...
+    </ng-template>
+  </div>
+</div>
