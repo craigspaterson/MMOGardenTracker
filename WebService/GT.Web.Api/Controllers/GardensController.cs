@@ -91,14 +91,14 @@ namespace GT.Web.Api.Controllers
             }
 
             Garden gardenDto;
-            IGardenRepository cropRepository = new GardenRepository(_context);
+            IGardenRepository gardenRepository = new GardenRepository(_context);
 
-            GardenEntity cropEntity = await cropRepository.GetGardenAsync(id);
+            GardenEntity gardenEntity = await gardenRepository.GetGardenAsync(id);
 
-            if (cropEntity != null)
+            if (gardenEntity != null)
             {
                 // Map entity to dto
-                gardenDto = _mapper.Map<Garden>(cropEntity);
+                gardenDto = _mapper.Map<Garden>(gardenEntity);
             }
             else
             {
