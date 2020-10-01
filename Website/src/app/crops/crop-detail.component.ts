@@ -72,7 +72,7 @@ export class CropDetailComponent implements OnInit {
       );
   }
 
-  private saveCrop(crop: Crop): void {
+  public saveCrop(crop: Crop): void {
     // console.log(crop);
 
     if (crop) {

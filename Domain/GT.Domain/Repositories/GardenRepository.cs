@@ -43,5 +43,20 @@ namespace GT.Domain.Repositories
 
             return garden;
         }
+
+        public async Task<Crop> PutGardenAsync(int id, Garden garden)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<Crop> PostGardenAsync(Garden garden)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task DeleteGardenAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
