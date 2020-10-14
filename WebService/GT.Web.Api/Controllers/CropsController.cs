@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using GT.Domain;
+using GT.Domain.Repositories;
+using GT.Domain.Repositories.Interfaces;
 using GT.Web.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,8 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GT.Domain.Repositories;
-using GT.Domain.Repositories.Interfaces;
 using CropEntity = GT.Domain.Models.Crop;
 
 namespace GT.Web.Api.Controllers
@@ -47,7 +47,11 @@ namespace GT.Web.Api.Controllers
         /// Gets the crops.
         /// </summary>
         /// <returns>IEnumerable&lt;Crop&gt;.</returns>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request</response>
         [HttpGet]
+        [ProducesResponseType(typeof(List<Crop>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary), StatusCodes.Status400BadRequest)]
         public async Task<IList<Crop>> GetCropsAsync()
         {
             ICropRepository cropRepository = new CropRepository(_context);
@@ -69,14 +73,17 @@ namespace GT.Web.Api.Controllers
         /// Gets the crop.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns>Task&lt;IActionResult&gt;.</returns>
+        /// <returns>Crop</returns>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="404">Not Found</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<IActionResult> GetCropAsync([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             if (id == 0)
             {
                 return BadRequest("The cropId is required.");
@@ -106,15 +113,16 @@ namespace GT.Web.Api.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="crop">The crop.</param>
-        /// <returns>Task&lt;IActionResult&gt;.</returns>
+        /// <response code="204">No Content</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="404">Not Found</response>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<IActionResult> PutCropAsync([FromRoute] int id, [FromBody] Crop crop)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             if (id != crop.CropId)
             {
                 return BadRequest();
@@ -146,15 +154,16 @@ namespace GT.Web.Api.Controllers
         /// Posts the crop.
         /// </summary>
         /// <param name="crop">The crop.</param>
-        /// <returns>Task&lt;IActionResult&gt;.</returns>
+        /// <response code="201">Created</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="409">Conflict</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesDefaultResponseType]
         public async Task<IActionResult> PostCropAsync([FromBody] Crop crop)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             CropEntity cropEntity = _mapper.Map<CropEntity>(crop);
             await _context.Crops.AddAsync(cropEntity);
             try
@@ -181,15 +190,16 @@ namespace GT.Web.Api.Controllers
         /// Deletes the crop.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns>Task&lt;IActionResult&gt;.</returns>
+        /// <response code="204">No Content</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="404">Not Found</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<IActionResult> DeleteCropAsync([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var crop = await _context.Crops.FindAsync(id);
             if (crop == null)
             {
@@ -199,7 +209,7 @@ namespace GT.Web.Api.Controllers
             _context.Crops.Remove(crop);
             await _context.SaveChangesAsync();
 
-            return Ok(crop);
+            return NoContent();
         }
 
         /// <summary>

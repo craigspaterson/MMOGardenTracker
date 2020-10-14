@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Reflection;
 using AutoMapper;
 using GT.Domain;
 using Microsoft.AspNetCore.Builder;
@@ -9,16 +12,30 @@ using Microsoft.Extensions.Hosting;
 
 namespace GT.Web.Api
 {
+    /// <summary>
+    /// Class Startup.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
+        /// <value>The configuration.</value>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services">The services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             // Add CORS
@@ -34,23 +51,26 @@ namespace GT.Web.Api
             // Add Swagger
             services.AddSwaggerGen(c =>
             {
-                //c.SwaggerDoc("v1", new Info { Title = "GT.Web.Api", Version = "v1" });
-
-                // Set the comments path for the swagger json and ui.
-                //var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                //var xmlPath = Path.Combine(basePath, "GT.Web.Api.xml");
-                //c.IncludeXmlComments(xmlPath);
                 c.DescribeAllEnumsAsStrings();
                 c.DescribeAllParametersInCamelCase();
                 c.IgnoreObsoleteActions();
                 c.IgnoreObsoleteProperties();
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             // Add AutoMapper
             services.AddAutoMapper(typeof(Startup));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the specified application.
+        /// </summary>
+        /// <param name="app">The application.</param>
+        /// <param name="env">The env.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // Enable cross origin requests
