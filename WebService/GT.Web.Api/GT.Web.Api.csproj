@@ -5,6 +5,11 @@
     <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Nowarn>$(NoWarn);1591</Nowarn>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>C:\Projects\Workspace\Magenic\MMO\GardenTracker\WebService\GT.Web.Api\GT.Web.Api.xml</DocumentationFile>
   </PropertyGroup>
