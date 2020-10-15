@@ -335,6 +335,24 @@
             </summary>
             <value>The crops.</value>
         </member>
+        <member name="T:GT.Web.Api.Program">
+            <summary>
+            Class Program.
+            </summary>
+        </member>
+        <member name="M:GT.Web.Api.Program.Main(System.String[])">
+            <summary>
+            Defines the entry point of the application.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:GT.Web.Api.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Creates the host builder.
+            </summary>
+            <param name="args">The arguments.</param>
+            <returns>IHostBuilder.</returns>
+        </member>
         <member name="T:GT.Web.Api.Startup">
             <summary>
             Class Startup.
@@ -342,7 +360,7 @@
         </member>
         <member name="M:GT.Web.Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
-            Initializes a new instance of the <see cref="T:GT.Web.Api.Startup"/> class.
+            Initializes a new instance of the <see cref="T:GT.Web.Api.Startup" /> class.
             </summary>
             <param name="configuration">The configuration.</param>
         </member>
@@ -364,6 +382,34 @@
             </summary>
             <param name="app">The application.</param>
             <param name="env">The env.</param>
+        </member>
+        <member name="T:GT.Web.Api.Startup.RemoveVersionFromParameter">
+            <summary>
+            Class RemoveVersionFromParameter.
+            Implements the <see cref="T:Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter" />
+            </summary>
+            <seealso cref="T:Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter" />
+        </member>
+        <member name="M:GT.Web.Api.Startup.RemoveVersionFromParameter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            Applies the specified operation.
+            </summary>
+            <param name="operation">The operation.</param>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:GT.Web.Api.Startup.ReplaceVersionWithExactValueInPath">
+            <summary>
+            Class ReplaceVersionWithExactValueInPath.
+            Implements the <see cref="T:Swashbuckle.AspNetCore.SwaggerGen.IDocumentFilter" />
+            </summary>
+            <seealso cref="T:Swashbuckle.AspNetCore.SwaggerGen.IDocumentFilter" />
+        </member>
+        <member name="M:GT.Web.Api.Startup.ReplaceVersionWithExactValueInPath.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            Applies the specified swagger document.
+            </summary>
+            <param name="swaggerDoc">The swagger document.</param>
+            <param name="context">The context.</param>
         </member>
     </members>
 </doc>
