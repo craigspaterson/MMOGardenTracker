@@ -6,6 +6,8 @@ using GT.Web.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,6 +29,11 @@ namespace GT.Web.Api.Controllers
         private readonly GardenTrackerAppContext _context;
 
         /// <summary>
+        /// The logger
+        /// </summary>
+        private readonly ILogger<CropsController> _logger;
+
+        /// <summary>
         /// The mapper
         /// </summary>
         private readonly IMapper _mapper;
@@ -36,10 +43,12 @@ namespace GT.Web.Api.Controllers
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="mapper"></param>
-        public CropsController(GardenTrackerAppContext context, IMapper mapper)
+        /// <param name="logger"></param>
+        public CropsController(GardenTrackerAppContext context, IMapper mapper, ILogger<CropsController> logger)
         {
             _context = context;
             _mapper = mapper;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         // GET: api/Crops
@@ -58,6 +67,8 @@ namespace GT.Web.Api.Controllers
             IEnumerable<CropEntity> cropEntities = await cropRepository.GetCropsAsync();
 
             IList<Crop> crops = new List<Crop>();
+
+            _logger.LogInformation("Begin GetCropsAsync");
 
             if (cropEntities != null)
             {
@@ -84,6 +95,8 @@ namespace GT.Web.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> GetCropAsync([FromRoute] int id)
         {
+            _logger.LogInformation("Begin GetCropAsync");
+
             if (id == 0)
             {
                 return BadRequest("The cropId is required.");
@@ -103,7 +116,7 @@ namespace GT.Web.Api.Controllers
             {
                 return NotFound();
             }
-            
+
             return Ok(cropDto);
         }
 
@@ -123,6 +136,8 @@ namespace GT.Web.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> PutCropAsync([FromRoute] int id, [FromBody] Crop crop)
         {
+            _logger.LogInformation("Begin PutCropAsync");
+
             if (id != crop.CropId)
             {
                 return BadRequest();
@@ -164,6 +179,8 @@ namespace GT.Web.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> PostCropAsync([FromBody] Crop crop)
         {
+            _logger.LogInformation("Begin PostCropAsync");
+
             CropEntity cropEntity = _mapper.Map<CropEntity>(crop);
             await _context.Crops.AddAsync(cropEntity);
             try
@@ -200,6 +217,8 @@ namespace GT.Web.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> DeleteCropAsync([FromRoute] int id)
         {
+            _logger.LogInformation("Begin DeleteCropAsync");
+
             var crop = await _context.Crops.FindAsync(id);
             if (crop == null)
             {

@@ -1,0 +1,427 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GT.Web.Api</name>
+    </assembly>
+    <members>
+        <member name="T:GT.Web.Api.Controllers.CropsController">
+            <summary>
+            Class CropsController.
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Controllers.CropsController._context">
+            <summary>
+            The context
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Controllers.CropsController._logger">
+            <summary>
+            The logger
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Controllers.CropsController._mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.CropsController.#ctor(GT.Domain.GardenTrackerAppContext,AutoMapper.IMapper,Microsoft.Extensions.Logging.ILogger{GT.Web.Api.Controllers.CropsController})">
+            <summary>
+            Initializes a new instance of the <see cref="T:GT.Web.Api.Controllers.CropsController"/> class.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="mapper"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.CropsController.GetCropsAsync">
+            <summary>
+            Gets the crops.
+            </summary>
+            <returns>IEnumerable&lt;Crop&gt;.</returns>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.CropsController.GetCropAsync(System.Int32)">
+            <summary>
+            Gets the crop.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>Crop</returns>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="404">Not Found</response>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.CropsController.PutCropAsync(System.Int32,GT.Web.Api.Models.Crop)">
+            <summary>
+            Puts the crop.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="crop">The crop.</param>
+            <response code="204">No Content</response>
+            <response code="400">Bad Request</response>
+            <response code="404">Not Found</response>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.CropsController.PostCropAsync(GT.Web.Api.Models.Crop)">
+            <summary>
+            Posts the crop.
+            </summary>
+            <param name="crop">The crop.</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="409">Conflict</response>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.CropsController.DeleteCropAsync(System.Int32)">
+            <summary>
+            Deletes the crop.
+            </summary>
+            <param name="id">The identifier.</param>
+            <response code="204">No Content</response>
+            <response code="400">Bad Request</response>
+            <response code="404">Not Found</response>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.CropsController.CropExists(System.Int32)">
+            <summary>
+            Crops the exists.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns><c>true</c> if crop, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="T:GT.Web.Api.Controllers.GardensController">
+            <summary>
+            Class GardensController.
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Controllers.GardensController._context">
+            <summary>
+            The context
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Controllers.GardensController._logger">
+            <summary>
+            The logger
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Controllers.GardensController._mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.GardensController.#ctor(GT.Domain.GardenTrackerAppContext,AutoMapper.IMapper,Microsoft.Extensions.Logging.ILogger{GT.Web.Api.Controllers.GardensController})">
+            <summary>
+            Initializes a new instance of the <see cref="T:GT.Web.Api.Controllers.GardensController" /> class.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="mapper"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.GardensController.GetGardensAsync">
+            <summary>
+            Get a list of gardens.
+            </summary>
+            <returns>List of garden</returns>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.GardensController.GetGardenAsync(System.Int32)">
+            <summary>
+            Get a single garden.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>Garden</returns>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="404">Not Found</response>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.GardensController.PutGardenAsync(System.Int32,GT.Web.Api.Models.Garden)">
+            <summary>
+            Updates the garden.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="garden">The garden.</param>
+            <response code="204">No Content</response>
+            <response code="400">Bad Request</response>
+            <response code="404">Not Found</response>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.GardensController.PostGardenAsync(GT.Web.Api.Models.Garden)">
+            <summary>
+            Posts the garden.
+            </summary>
+            <param name="garden">The garden.</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="409">Conflict</response>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.GardensController.DeleteGardenAsync(System.Int32)">
+            <summary>
+            Deletes the garden.
+            </summary>
+            <param name="id">The identifier.</param>
+            <response code="204">No Content</response>
+            <response code="400">Bad Request</response>
+            <response code="404">Not Found</response>
+        </member>
+        <member name="M:GT.Web.Api.Controllers.GardensController.GardenExists(System.Int32)">
+            <summary>
+            Gardens the exists.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns><c>true</c> if garden, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="T:GT.Web.Api.Models.Activities">
+            <summary>
+            Enum Activities
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.Sowing">
+            <summary>
+            The sowing
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.Soaking">
+            <summary>
+            The soaking
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.Germinating">
+            <summary>
+            The germinating
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.Transplanting">
+            <summary>
+            The transplanting
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.Cloning">
+            <summary>
+            The cloning
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.Watering">
+            <summary>
+            The watering
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.Fertilizing">
+            <summary>
+            The fertilizing
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.Weeding">
+            <summary>
+            The weeding
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.ControllingPests">
+            <summary>
+            The controlling pests
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.ControllingDisease">
+            <summary>
+            The controlling disease
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.Thinning">
+            <summary>
+            The thinning
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.Pruning">
+            <summary>
+            The pruning
+            </summary>
+        </member>
+        <member name="F:GT.Web.Api.Models.Activities.Harvesting">
+            <summary>
+            The harvesting
+            </summary>
+        </member>
+        <member name="T:GT.Web.Api.Models.Crop">
+            <summary>
+            Class Crop.
+            </summary>
+        </member>
+        <member name="P:GT.Web.Api.Models.Crop.GardenId">
+            <summary>
+            Gets or sets the garden identifier.
+            </summary>
+            <value>The garden identifier.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.Crop.CropId">
+            <summary>
+            Gets or sets the crop identifier.
+            </summary>
+            <value>The crop identifier.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.Crop.CropName">
+            <summary>
+            Gets or sets the name of the crop.
+            </summary>
+            <value>The name of the crop.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.Crop.PlantName">
+            <summary>
+            Gets or sets the name of the plant.
+            </summary>
+            <value>The name of the plant.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.Crop.BeginDate">
+            <summary>
+            Gets or sets the begin date.
+            </summary>
+            <value>The begin date.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.Crop.EndDate">
+            <summary>
+            Gets or sets the end date.
+            </summary>
+            <value>The end date.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.Crop.Notes">
+            <summary>
+            Gets or sets the notes.
+            </summary>
+            <value>The notes.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.Crop.CropActivities">
+            <summary>
+            Gets or sets the crop activities.
+            </summary>
+            <value>The crop activities.</value>
+        </member>
+        <member name="T:GT.Web.Api.Models.CropActivity">
+            <summary>
+            Class CropActivity.
+            </summary>
+        </member>
+        <member name="P:GT.Web.Api.Models.CropActivity.CropActivityId">
+            <summary>
+            Gets or sets the crop activity identifier.
+            </summary>
+            <value>The crop activity identifier.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.CropActivity.CropId">
+            <summary>
+            Gets or sets the crop identifier.
+            </summary>
+            <value>The crop identifier.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.CropActivity.ActivityType">
+            <summary>
+            Gets or sets the type of the activity.
+            </summary>
+            <value>The type of the activity.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.CropActivity.ActivityDate">
+            <summary>
+            Gets or sets the activity date.
+            </summary>
+            <value>The activity date.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.CropActivity.Notes">
+            <summary>
+            Gets or sets the notes.
+            </summary>
+            <value>The notes.</value>
+        </member>
+        <member name="T:GT.Web.Api.Models.Garden">
+            <summary>
+            Class Garden.
+            </summary>
+        </member>
+        <member name="P:GT.Web.Api.Models.Garden.GardenId">
+            <summary>
+            Gets or sets the garden identifier.
+            </summary>
+            <value>The garden identifier.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.Garden.GardenName">
+            <summary>
+            Gets or sets the name of the garden.
+            </summary>
+            <value>The name of the garden.</value>
+        </member>
+        <member name="P:GT.Web.Api.Models.Garden.Crops">
+            <summary>
+            Gets or sets the crops.
+            </summary>
+            <value>The crops.</value>
+        </member>
+        <member name="T:GT.Web.Api.Program">
+            <summary>
+            Class Program.
+            </summary>
+        </member>
+        <member name="M:GT.Web.Api.Program.Main(System.String[])">
+            <summary>
+            Defines the entry point of the application.
+            </summary>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:GT.Web.Api.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Creates the host builder.
+            </summary>
+            <param name="args">The arguments.</param>
+            <returns>IHostBuilder.</returns>
+        </member>
+        <member name="T:GT.Web.Api.Startup">
+            <summary>
+            Class Startup.
+            </summary>
+        </member>
+        <member name="M:GT.Web.Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GT.Web.Api.Startup" /> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="P:GT.Web.Api.Startup.Configuration">
+            <summary>
+            Gets the configuration.
+            </summary>
+            <value>The configuration.</value>
+        </member>
+        <member name="M:GT.Web.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">The services.</param>
+        </member>
+        <member name="M:GT.Web.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configures the specified application.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="env">The env.</param>
+        </member>
+        <member name="T:GT.Web.Api.Startup.RemoveVersionFromParameter">
+            <summary>
+            Class RemoveVersionFromParameter.
+            Implements the <see cref="T:Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter" />
+            </summary>
+            <seealso cref="T:Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter" />
+        </member>
+        <member name="M:GT.Web.Api.Startup.RemoveVersionFromParameter.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            Applies the specified operation.
+            </summary>
+            <param name="operation">The operation.</param>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:GT.Web.Api.Startup.ReplaceVersionWithExactValueInPath">
+            <summary>
+            Class ReplaceVersionWithExactValueInPath.
+            Implements the <see cref="T:Swashbuckle.AspNetCore.SwaggerGen.IDocumentFilter" />
+            </summary>
+            <seealso cref="T:Swashbuckle.AspNetCore.SwaggerGen.IDocumentFilter" />
+        </member>
+        <member name="M:GT.Web.Api.Startup.ReplaceVersionWithExactValueInPath.Apply(Microsoft.OpenApi.Models.OpenApiDocument,Swashbuckle.AspNetCore.SwaggerGen.DocumentFilterContext)">
+            <summary>
+            Applies the specified swagger document.
+            </summary>
+            <param name="swaggerDoc">The swagger document.</param>
+            <param name="context">The context.</param>
+        </member>
+    </members>
+</doc>

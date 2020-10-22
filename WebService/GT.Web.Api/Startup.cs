@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.IO;
@@ -90,6 +91,11 @@ namespace GT.Web.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            // Write streamlined request completion events, instead of the more verbose ones from the framework.
+            // To use the default framework request logging instead, remove this line and set the "Microsoft"
+            // level in appsettings.json to "Information".
+            app.UseSerilogRequestLogging();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -100,7 +106,7 @@ namespace GT.Web.Api
             {
                 endpoints.MapControllers();
             });
-            
+
             // Insert middleware to expose the generated Swagger as JSON endpoint(s)
             app.UseSwagger();
 

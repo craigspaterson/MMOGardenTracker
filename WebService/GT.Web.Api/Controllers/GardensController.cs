@@ -6,6 +6,8 @@ using GT.Web.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,6 +29,11 @@ namespace GT.Web.Api.Controllers
         private readonly GardenTrackerAppContext _context;
 
         /// <summary>
+        /// The logger
+        /// </summary>
+        private readonly ILogger<GardensController> _logger;
+
+        /// <summary>
         /// The mapper
         /// </summary>
         private readonly IMapper _mapper;
@@ -36,10 +43,12 @@ namespace GT.Web.Api.Controllers
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="mapper"></param>
-        public GardensController(GardenTrackerAppContext context, IMapper mapper)
+        /// <param name="logger"></param>
+        public GardensController(GardenTrackerAppContext context, IMapper mapper, ILogger<GardensController> logger)
         {
             _context = context;
             _mapper = mapper;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         // GET: api/Gardens
@@ -58,6 +67,8 @@ namespace GT.Web.Api.Controllers
             IEnumerable<GardenEntity> gardenEntities = await gardenRepository.GetGardensAsync();
 
             IList<Garden> gardens = new List<Garden>();
+
+            _logger.LogInformation("Begin GetGardensAsync");
 
             if (gardenEntities != null)
             {
@@ -83,6 +94,8 @@ namespace GT.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetGardenAsync([FromRoute] int id)
         {
+            _logger.LogInformation("Begin GetGardenAsync");
+
             if (id == 0)
             {
                 return BadRequest("The gardenId is required.");
@@ -102,7 +115,7 @@ namespace GT.Web.Api.Controllers
             {
                 return NotFound();
             }
-            
+
             return Ok(gardenDto);
         }
 
@@ -121,6 +134,8 @@ namespace GT.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> PutGardenAsync([FromRoute] int id, [FromBody] Garden garden)
         {
+            _logger.LogInformation("Begin PutGardenAsync");
+
             if (id != garden.GardenId)
             {
                 return BadRequest();
@@ -161,6 +176,8 @@ namespace GT.Web.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> PostGardenAsync([FromBody] Garden garden)
         {
+            _logger.LogInformation("Begin PostGardenAsync");
+
             GardenEntity gardenEntity = _mapper.Map<GardenEntity>(garden);
             await _context.Gardens.AddAsync(gardenEntity);
             try
@@ -195,6 +212,8 @@ namespace GT.Web.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> DeleteGardenAsync([FromRoute] int id)
         {
+            _logger.LogInformation("Begin DeleteGardenAsync");
+
             var garden = await _context.Gardens.FindAsync(id);
             if (garden == null)
             {
