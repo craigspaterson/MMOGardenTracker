@@ -9,7 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using GardenEntity = GT.Domain.Models.Garden;
 
@@ -83,6 +85,7 @@ namespace GT.Web.Api.Controllers
         /// <summary>
         /// Get a single garden.
         /// </summary>
+        /// <param name="requestHeader"></param>
         /// <param name="id">The identifier.</param>
         /// <returns>Garden</returns>
         /// <response code="200">OK</response>
@@ -92,9 +95,11 @@ namespace GT.Web.Api.Controllers
         [ProducesResponseType(typeof(Garden), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetGardenAsync([FromRoute] int id)
+        public async Task<IActionResult> GetGardenAsync([FromHeader(Name="requestHeader"), Required] string requestHeader, [FromRoute] int id)
         {
             _logger.LogInformation("Begin GetGardenAsync");
+
+            var garden = JsonSerializer.Deserialize<Garden>(requestHeader, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             if (id == 0)
             {
@@ -174,9 +179,12 @@ namespace GT.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> PostGardenAsync([FromBody] Garden garden)
+        public async Task<IActionResult> PostGardenAsync([FromHeader(Name="requestHeader"), Required] string requestHeader, [FromBody] Garden garden)
         {
             _logger.LogInformation("Begin PostGardenAsync");
+
+            var xgarden = JsonSerializer.Deserialize<Garden>(requestHeader, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
 
             GardenEntity gardenEntity = _mapper.Map<GardenEntity>(garden);
             await _context.Gardens.AddAsync(gardenEntity);

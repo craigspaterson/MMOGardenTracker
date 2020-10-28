@@ -21,6 +21,7 @@ namespace GT.Web.Api.Models
         /// </summary>
         /// <value>The crop identifier.</value>
         public int CropId { get; set; }
+
         /// <summary>
         /// Gets or sets the name of the crop.
         /// </summary>
@@ -28,6 +29,7 @@ namespace GT.Web.Api.Models
         [Required]
         [MaxLength(60)]
         public string CropName { get; set; }
+
         /// <summary>
         /// Gets or sets the name of the plant.
         /// </summary>
@@ -35,18 +37,20 @@ namespace GT.Web.Api.Models
         [Required]
         [MaxLength(60)]
         public string PlantName { get; set; }
+
         /// <summary>
         /// Gets or sets the begin date.
         /// </summary>
         /// <value>The begin date.</value>
         [Required]
-        public DateTime BeginDate { get; set; }
+        public DateTimeOffset BeginDate { get; set; }
 
         /// <summary>
         /// Gets or sets the end date.
         /// </summary>
         /// <value>The end date.</value>
-        public DateTime? EndDate { get; set; }
+        public DateTimeOffset? EndDate { get; set; }
+
         /// <summary>
         /// Gets or sets the notes.
         /// </summary>

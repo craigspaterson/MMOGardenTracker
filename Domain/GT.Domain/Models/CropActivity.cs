@@ -26,7 +26,7 @@ namespace GT.Domain.Models
         /// </summary>
         /// <value>The activity date.</value>
         [Required]
-        public DateTime ActivityDate { get; set; }
+        public DateTimeOffset ActivityDate { get; set; }
 
         /// <summary>
         /// Gets or sets the notes.

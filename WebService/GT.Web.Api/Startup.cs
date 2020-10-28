@@ -13,6 +13,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GT.Web.Api
 {
@@ -45,28 +47,34 @@ namespace GT.Web.Api
             // Add CORS
             services.AddCors();
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(opts =>
+                {
+                    opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+                    opts.JsonSerializerOptions.WriteIndented = true;
+                    opts.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                });
 
             // Add AutoMapper
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddDbContext<GardenTrackerAppContext>(options => {
+            services.AddDbContext<GardenTrackerAppContext>(options =>
+            {
                 options.UseSqlServer(Configuration.GetConnectionString("GardenTrackerAppConnection"));
             });
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             // Add Swagger
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(opts =>
             {
-                //c.DescribeAllEnumsAsStrings();
-                c.DescribeAllParametersInCamelCase();
-                c.IgnoreObsoleteActions();
-                c.IgnoreObsoleteProperties();
+                opts.DescribeAllParametersInCamelCase();
+                opts.IgnoreObsoleteActions();
+                opts.IgnoreObsoleteProperties();
 
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
+                opts.IncludeXmlComments(xmlPath);
             });
         }
 
