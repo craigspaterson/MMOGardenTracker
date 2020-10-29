@@ -170,6 +170,7 @@ namespace GT.Web.Api.Controllers
         /// <summary>
         /// Posts the garden.
         /// </summary>
+        /// <param name="requestHeader"></param>
         /// <param name="garden">The garden.</param>
         /// <response code="201">Created</response>
         /// <response code="400">Bad Request</response>
