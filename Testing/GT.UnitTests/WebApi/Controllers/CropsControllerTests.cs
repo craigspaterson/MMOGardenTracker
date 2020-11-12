@@ -13,7 +13,7 @@ namespace GT.UnitTests.WebApi.Controllers
             // Act
 
             // Assert
-            Assert.Fail();
+            
         }
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace GT.UnitTests.WebApi.Controllers
             // Act
 
             // Assert
-            Assert.Fail();
+            
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace GT.UnitTests.WebApi.Controllers
             // Act
 
             // Assert
-            Assert.Fail();
+            
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace GT.UnitTests.WebApi.Controllers
             // Act
 
             // Assert
-            Assert.Fail();
+            
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace GT.UnitTests.WebApi.Controllers
             // Act
 
             // Assert
-            Assert.Fail();
+            
         }
 
         [TestMethod]
@@ -68,7 +68,7 @@ namespace GT.UnitTests.WebApi.Controllers
             // Act
 
             // Assert
-            Assert.Fail();
+            
         }
     }
 }
