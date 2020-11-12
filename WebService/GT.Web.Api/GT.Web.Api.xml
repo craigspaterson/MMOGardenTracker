@@ -121,11 +121,10 @@
             <response code="200">OK</response>
             <response code="400">Bad Request</response>
         </member>
-        <member name="M:GT.Web.Api.Controllers.GardensController.GetGardenAsync(System.String,System.Int32)">
+        <member name="M:GT.Web.Api.Controllers.GardensController.GetGardenAsync(System.Int32)">
             <summary>
             Get a single garden.
             </summary>
-            <param name="requestHeader"></param>
             <param name="id">The identifier.</param>
             <returns>Garden</returns>
             <response code="200">OK</response>
@@ -138,11 +137,12 @@
             </summary>
             <param name="id">The identifier.</param>
             <param name="garden">The garden.</param>
+            <response code="200">OK</response>
             <response code="204">No Content</response>
             <response code="400">Bad Request</response>
             <response code="404">Not Found</response>
         </member>
-        <member name="M:GT.Web.Api.Controllers.GardensController.PostGardenAsync(System.String,GT.Web.Api.Models.Garden)">
+        <member name="M:GT.Web.Api.Controllers.GardensController.PostGardenAsync(GT.Web.Api.Models.Garden)">
             <summary>
             Posts the garden.
             </summary>
