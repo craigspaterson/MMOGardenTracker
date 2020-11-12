@@ -24,7 +24,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "GT.Database", "Database\GT.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{EB9489D4-7A5E-4502-ADDE-289080FF6A7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GT.UnitTests", "Testing\GT.UnitTests\GT.UnitTests.csproj", "{FE7592B4-A0DD-4A75-B9C4-715EA1625B0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GT.UnitTests", "Testing\GT.UnitTests\GT.UnitTests.csproj", "{FE7592B4-A0DD-4A75-B9C4-715EA1625B0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,8 @@ Global
 		{A664FD41-D9C7-4C37-920A-9EA0E8E68EE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A664FD41-D9C7-4C37-920A-9EA0E8E68EE8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0DAC7F57-C14D-4672-8089-AD112AB4AA71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0DAC7F57-C14D-4672-8089-AD112AB4AA71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DAC7F57-C14D-4672-8089-AD112AB4AA71}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{0DAC7F57-C14D-4672-8089-AD112AB4AA71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0DAC7F57-C14D-4672-8089-AD112AB4AA71}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0DAC7F57-C14D-4672-8089-AD112AB4AA71}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{FE7592B4-A0DD-4A75-B9C4-715EA1625B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FE7592B4-A0DD-4A75-B9C4-715EA1625B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
