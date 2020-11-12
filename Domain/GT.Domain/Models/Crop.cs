@@ -36,13 +36,13 @@ namespace GT.Domain.Models
         /// </summary>
         /// <value>The begin date.</value>
         [Required]
-        public DateTime BeginDate { get; set; }
+        public DateTimeOffset BeginDate { get; set; }
 
         /// <summary>
         /// Gets or sets the end date.
         /// </summary>
         /// <value>The end date.</value>
-        public DateTime? EndDate { get; set; }
+        public DateTimeOffset? EndDate { get; set; }
 
         /// <summary>
         /// Gets or sets the notes.

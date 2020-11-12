@@ -6,51 +6,83 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Serilog;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace GT.Web.Api
 {
+    /// <summary>
+    /// Class Startup.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup" /> class.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
+        /// <value>The configuration.</value>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// </summary>
+        /// <param name="services">The services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             // Add CORS
             services.AddCors();
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(opts =>
+                {
+                    opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+                    opts.JsonSerializerOptions.WriteIndented = true;
+                    opts.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                });
 
-            services.AddDbContext<GardenTrackerAppContext>(options => {
+            // Add AutoMapper
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddDbContext<GardenTrackerAppContext>(options =>
+            {
                 options.UseSqlServer(Configuration.GetConnectionString("GardenTrackerAppConnection"));
             });
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             // Add Swagger
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(opts =>
             {
-                //c.SwaggerDoc("v1", new Info { Title = "GT.Web.Api", Version = "v1" });
+                opts.DescribeAllParametersInCamelCase();
+                opts.IgnoreObsoleteActions();
+                opts.IgnoreObsoleteProperties();
 
-                // Set the comments path for the swagger json and ui.
-                //var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                //var xmlPath = Path.Combine(basePath, "GT.Web.Api.xml");
-                //c.IncludeXmlComments(xmlPath);
-                c.DescribeAllEnumsAsStrings();
-                c.DescribeAllParametersInCamelCase();
-                c.IgnoreObsoleteActions();
-                c.IgnoreObsoleteProperties();
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                opts.IncludeXmlComments(xmlPath);
             });
-
-            // Add AutoMapper
-            services.AddAutoMapper(typeof(Startup));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the specified application.
+        /// </summary>
+        /// <param name="app">The application.</param>
+        /// <param name="env">The env.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // Enable cross origin requests
@@ -67,6 +99,11 @@ namespace GT.Web.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            // Write streamlined request completion events, instead of the more verbose ones from the framework.
+            // To use the default framework request logging instead, remove this line and set the "Microsoft"
+            // level in appsettings.json to "Information".
+            app.UseSerilogRequestLogging();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -77,7 +114,7 @@ namespace GT.Web.Api
             {
                 endpoints.MapControllers();
             });
-            
+
             // Insert middleware to expose the generated Swagger as JSON endpoint(s)
             app.UseSwagger();
 
@@ -87,6 +124,48 @@ namespace GT.Web.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "GT.Web.Api");
             });
+        }
+
+        /// <summary>
+        /// Class RemoveVersionFromParameter.
+        /// Implements the <see cref="Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter" />
+        /// </summary>
+        /// <seealso cref="Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter" />
+        public class RemoveVersionFromParameter : IOperationFilter
+        {
+            /// <summary>
+            /// Applies the specified operation.
+            /// </summary>
+            /// <param name="operation">The operation.</param>
+            /// <param name="context">The context.</param>
+            public void Apply(OpenApiOperation operation, OperationFilterContext context)
+            {
+                var versionParameter = operation.Parameters.Single(p => p.Name == "version");
+                operation.Parameters.Remove(versionParameter);
+            }
+        }
+
+        /// <summary>
+        /// Class ReplaceVersionWithExactValueInPath.
+        /// Implements the <see cref="Swashbuckle.AspNetCore.SwaggerGen.IDocumentFilter" />
+        /// </summary>
+        /// <seealso cref="Swashbuckle.AspNetCore.SwaggerGen.IDocumentFilter" />
+        public class ReplaceVersionWithExactValueInPath : IDocumentFilter
+        {
+            /// <summary>
+            /// Applies the specified swagger document.
+            /// </summary>
+            /// <param name="swaggerDoc">The swagger document.</param>
+            /// <param name="context">The context.</param>
+            public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
+            {
+                var paths = new OpenApiPaths();
+                foreach (var path in swaggerDoc.Paths)
+                {
+                    paths.Add(path.Key.Replace("v{version}", swaggerDoc.Info.Version), path.Value);
+                }
+                swaggerDoc.Paths = paths;
+            }
         }
     }
 }
