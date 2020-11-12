@@ -13,6 +13,7 @@ namespace GT.Web.Api.Models
         /// </summary>
         /// <value>The crop activity identifier.</value>
         public int CropActivityId { get; set; }
+
         /// <summary>
         /// Gets or sets the crop identifier.
         /// </summary>
@@ -25,12 +26,14 @@ namespace GT.Web.Api.Models
         /// </summary>
         /// <value>The type of the activity.</value>
         public Activities ActivityType { get; set; }
+
         /// <summary>
         /// Gets or sets the activity date.
         /// </summary>
         /// <value>The activity date.</value>
         [Required]
-        public DateTime ActivityDate { get; set; }
+        public DateTimeOffset ActivityDate { get; set; }
+
         /// <summary>
         /// Gets or sets the notes.
         /// </summary>

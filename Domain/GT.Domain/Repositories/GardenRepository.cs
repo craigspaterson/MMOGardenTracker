@@ -46,17 +46,24 @@ namespace GT.Domain.Repositories
 
         public async Task<Crop> PutGardenAsync(int id, Garden garden)
         {
+            // TODO: Rename function as Update
             throw new System.NotImplementedException();
         }
 
         public async Task<Crop> PostGardenAsync(Garden garden)
         {
+            // TODO: Rename function as Insert or Create
             throw new System.NotImplementedException();
         }
 
         public async Task DeleteGardenAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var garden = await _context.Gardens.FindAsync(id);
+            if (garden != null)
+            {
+                _context.Gardens.Remove(garden);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
