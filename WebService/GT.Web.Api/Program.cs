@@ -1,35 +1,37 @@
+using System;
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Serilog.Events;
-using Serilog.Formatting.Compact;
-using System;
 
 namespace GT.Web.Api
 {
-    /// <summary>
-    /// Class Program.
-    /// </summary>
     public class Program
     {
-        /// <summary>
-        /// Defines the entry point of the application.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
+        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true)
+            .AddEnvironmentVariables()
+            .Build();
+
         public static int Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+                .ReadFrom.Configuration(Configuration)
                 .Enrich.FromLogContext()
-                .WriteTo.Console(new RenderedCompactJsonFormatter())
+                .WriteTo.Debug()
+                .WriteTo.Console(
+                    outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
                 .CreateLogger();
 
             try
             {
                 Log.Information("Starting web host");
+
                 CreateHostBuilder(args).Build().Run();
+
                 return 0;
             }
             catch (Exception ex)
@@ -43,11 +45,6 @@ namespace GT.Web.Api
             }
         }
 
-        /// <summary>
-        /// Creates the host builder.
-        /// </summary>
-        /// <param name="args">The arguments.</param>
-        /// <returns>IHostBuilder.</returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseSerilog()
@@ -55,5 +52,6 @@ namespace GT.Web.Api
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }
