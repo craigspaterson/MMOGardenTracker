@@ -6,7 +6,7 @@ using GardenDto = GT.Web.Api.Models.Garden;
 
 namespace GT.Web.Api.Mappings
 {
-    internal class AutoMapperProfile : Profile
+    public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
         {

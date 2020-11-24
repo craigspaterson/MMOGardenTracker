@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
-using GT.Domain;
-using GT.Domain.Repositories;
 using GT.Domain.Repositories.Interfaces;
 using GT.Web.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using GardenEntity = GT.Domain.Models.Garden;
 
@@ -23,32 +19,21 @@ namespace GT.Web.Api.Controllers
     [ApiController]
     public class GardensController : ControllerBase
     {
-        /// <summary>
-        /// The context
-        /// </summary>
-        private readonly GardenTrackerAppContext _context;
-
-        /// <summary>
-        /// The logger
-        /// </summary>
         private readonly ILogger<GardensController> _logger;
-
-        /// <summary>
-        /// The mapper
-        /// </summary>
         private readonly IMapper _mapper;
+        private readonly IGardenRepository _gardenRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GardensController" /> class.
         /// </summary>
-        /// <param name="context">The context.</param>
         /// <param name="mapper"></param>
         /// <param name="logger"></param>
-        public GardensController(GardenTrackerAppContext context, IMapper mapper, ILogger<GardensController> logger)
+        /// <param name="gardenRepository"></param>
+        public GardensController(IMapper mapper, ILogger<GardensController> logger, IGardenRepository gardenRepository)
         {
-            _context = context;
-            _mapper = mapper;
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _gardenRepository = gardenRepository ?? throw new ArgumentNullException(nameof(gardenRepository));
         }
 
         // GET: api/Gardens
@@ -63,12 +48,11 @@ namespace GT.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IList<Garden>> GetGardensAsync()
         {
-            IGardenRepository gardenRepository = new GardenRepository(_context);
-            IEnumerable<GardenEntity> gardenEntities = await gardenRepository.GetGardensAsync();
+            _logger.LogInformation("Begin GetGardensAsync");
+
+            var gardenEntities = await _gardenRepository.GetGardensAsync();
 
             IList<Garden> gardens = new List<Garden>();
-
-            _logger.LogInformation("Begin GetGardensAsync");
 
             if (gardenEntities != null)
             {
@@ -102,9 +86,8 @@ namespace GT.Web.Api.Controllers
             }
 
             Garden gardenDto;
-            IGardenRepository gardenRepository = new GardenRepository(_context);
 
-            GardenEntity gardenEntity = await gardenRepository.GetGardenAsync(id);
+            GardenEntity gardenEntity = await _gardenRepository.GetGardenAsync(id);
 
             if (gardenEntity != null)
             {
@@ -144,20 +127,14 @@ namespace GT.Web.Api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(garden).State = EntityState.Modified;
+            GardenEntity gardenEntity = _mapper.Map<GardenEntity>(garden);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!GardenExists(id))
-                {
-                    return NotFound();
-                }
+            gardenEntity = await _gardenRepository.PutGardenAsync(id, gardenEntity);
 
-                throw;
+            if (gardenEntity != null)
+            {
+                // Map entity to dto
+                garden = _mapper.Map<Garden>(gardenEntity);
             }
 
             return Ok(garden);
@@ -181,20 +158,10 @@ namespace GT.Web.Api.Controllers
             _logger.LogInformation("Begin PostGardenAsync");
 
             GardenEntity gardenEntity = _mapper.Map<GardenEntity>(garden);
-            await _context.Gardens.AddAsync(gardenEntity);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (GardenExists(garden.GardenId))
-                {
-                    return new StatusCodeResult(StatusCodes.Status409Conflict);
-                }
 
-                throw;
-            }
+            gardenEntity = await _gardenRepository.PostGardenAsync(gardenEntity);
+
+            garden = _mapper.Map<Garden>(gardenEntity);
 
             return CreatedAtAction("GetGardenAsync", new { id = garden.GardenId }, garden);
         }
@@ -216,26 +183,9 @@ namespace GT.Web.Api.Controllers
         {
             _logger.LogInformation("Begin DeleteGardenAsync");
 
-            var garden = await _context.Gardens.FindAsync(id);
-            if (garden == null)
-            {
-                return NotFound();
-            }
-
-            _context.Gardens.Remove(garden);
-            await _context.SaveChangesAsync();
+            await _gardenRepository.DeleteGardenAsync(id);
 
             return NoContent();
-        }
-
-        /// <summary>
-        /// Gardens the exists.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns><c>true</c> if garden, <c>false</c> otherwise.</returns>
-        private bool GardenExists(int id)
-        {
-            return _context.Gardens.Any(e => e.GardenId == id);
         }
     }
 }
