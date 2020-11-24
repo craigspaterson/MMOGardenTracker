@@ -23,19 +23,19 @@ namespace GT.Domain.Repositories.Interfaces
         Task<Crop> GetCropAsync(int id);
 
         /// <summary>
+        /// Posts the crop asynchronous.
+        /// </summary>
+        /// <param name="crop">The crop.</param>
+        /// <returns>Task&lt;Crop&gt;.</returns>
+        Task<Crop> PostCropAsync(Crop crop);
+
+        /// <summary>
         /// Puts the crop asynchronous.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="crop">The crop.</param>
         /// <returns>Task&lt;Crop&gt;.</returns>
         Task<Crop> PutCropAsync(int id, Crop crop);
-
-        /// <summary>
-        /// Posts the crop asynchronous.
-        /// </summary>
-        /// <param name="crop">The crop.</param>
-        /// <returns>Task&lt;Crop&gt;.</returns>
-        Task<Crop> PostCropAsync(Crop crop);
 
         /// <summary>
         /// Deletes the crop asynchronous.
