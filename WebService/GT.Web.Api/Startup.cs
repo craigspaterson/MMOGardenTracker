@@ -1,5 +1,6 @@
 using AutoMapper;
 using GT.Domain;
+using GT.Web.Api.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,20 +24,16 @@ namespace GT.Web.Api
     /// </summary>
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup" /> class.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
-
-        /// <summary>
-        /// Gets the configuration.
-        /// </summary>
-        /// <value>The configuration.</value>
-        public IConfiguration Configuration { get; }
 
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
@@ -58,10 +55,14 @@ namespace GT.Web.Api
             // Add AutoMapper
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddDbContext<GardenTrackerAppContext>(options =>
+            services.AddDbContextPool<GardenTrackerAppContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("GardenTrackerAppConnection"));
+                // options.UseSqlServer(_configuration.GetConnectionString("GardenTrackerAppConnection"));
+                options.UseNpgsql(_configuration.GetConnectionString("GardenTrackerAppConnection"));
             });
+
+            // Add Repositories
+            services.AddRepositories();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             // Add Swagger
