@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
-using GT.Domain;
-using GT.Domain.Repositories;
 using GT.Domain.Repositories.Interfaces;
 using GT.Web.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CropEntity = GT.Domain.Models.Crop;
 
@@ -23,32 +19,21 @@ namespace GT.Web.Api.Controllers
     [ApiController]
     public class CropsController : ControllerBase
     {
-        /// <summary>
-        /// The context
-        /// </summary>
-        private readonly GardenTrackerAppContext _context;
-
-        /// <summary>
-        /// The logger
-        /// </summary>
         private readonly ILogger<CropsController> _logger;
-
-        /// <summary>
-        /// The mapper
-        /// </summary>
         private readonly IMapper _mapper;
+        private readonly ICropRepository _cropRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CropsController"/> class.
         /// </summary>
-        /// <param name="context">The context.</param>
         /// <param name="mapper"></param>
         /// <param name="logger"></param>
-        public CropsController(GardenTrackerAppContext context, IMapper mapper, ILogger<CropsController> logger)
+        /// <param name="cropRepository"></param>
+        public CropsController(IMapper mapper, ILogger<CropsController> logger, ICropRepository cropRepository)
         {
-            _context = context;
             _mapper = mapper;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _cropRepository = cropRepository;
         }
 
         // GET: api/Crops
@@ -63,12 +48,11 @@ namespace GT.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IList<Crop>> GetCropsAsync()
         {
-            ICropRepository cropRepository = new CropRepository(_context);
-            IEnumerable<CropEntity> cropEntities = await cropRepository.GetCropsAsync();
+            _logger.LogInformation("Begin GetCropsAsync");
+
+            var cropEntities = await _cropRepository.GetCropsAsync();
 
             IList<Crop> crops = new List<Crop>();
-
-            _logger.LogInformation("Begin GetCropsAsync");
 
             if (cropEntities != null)
             {
@@ -103,9 +87,7 @@ namespace GT.Web.Api.Controllers
             }
 
             Crop cropDto;
-            ICropRepository cropRepository = new CropRepository(_context);
-
-            CropEntity cropEntity = await cropRepository.GetCropAsync(id);
+            CropEntity cropEntity = await _cropRepository.GetCropAsync(id);
 
             if (cropEntity != null)
             {
@@ -130,6 +112,7 @@ namespace GT.Web.Api.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -143,25 +126,17 @@ namespace GT.Web.Api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(crop).State = EntityState.Modified;
+            CropEntity cropEntity = _mapper.Map<CropEntity>(crop);
 
-            try
+            cropEntity = await _cropRepository.PutCropAsync(id, cropEntity);
+
+            if (cropEntity != null)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CropExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                // Map entity to dto
+                crop = _mapper.Map<Crop>(cropEntity);
             }
 
-            return NoContent();
+            return Ok(crop);
         }
 
         // POST: api/Crops
@@ -179,27 +154,15 @@ namespace GT.Web.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> PostCropAsync([FromBody] Crop crop)
         {
-            _logger.LogInformation("Begin PostCropAsync");
+            _logger.LogInformation("Begin PostGardenAsync");
 
             CropEntity cropEntity = _mapper.Map<CropEntity>(crop);
-            await _context.Crops.AddAsync(cropEntity);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (CropExists(crop.CropId))
-                {
-                    return new StatusCodeResult(StatusCodes.Status409Conflict);
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return CreatedAtAction("GetCropAsync", new { id = crop.CropId }, crop);
+            cropEntity = await _cropRepository.PostCropAsync(cropEntity);
+
+            crop = _mapper.Map<Crop>(cropEntity);
+
+            return CreatedAtAction("GetCropAsync", new { id = crop.GardenId }, crop);
         }
 
         // DELETE: api/Crops/5
@@ -219,26 +182,9 @@ namespace GT.Web.Api.Controllers
         {
             _logger.LogInformation("Begin DeleteCropAsync");
 
-            var crop = await _context.Crops.FindAsync(id);
-            if (crop == null)
-            {
-                return NotFound();
-            }
-
-            _context.Crops.Remove(crop);
-            await _context.SaveChangesAsync();
+            await _cropRepository.DeleteCropAsync(id);
 
             return NoContent();
-        }
-
-        /// <summary>
-        /// Crops the exists.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns><c>true</c> if crop, <c>false</c> otherwise.</returns>
-        private bool CropExists(int id)
-        {
-            return _context.Crops.Any(e => e.CropId == id);
         }
     }
 }

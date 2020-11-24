@@ -62,6 +62,7 @@
     <Folder Include="dbo\Scripts" />
     <Folder Include="dbo\Tables" />
     <Folder Include="Migrations" />
+    <Folder Include="PostgreSQL" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Garden.sql" />
@@ -71,6 +72,8 @@
   <ItemGroup>
     <None Include="dbo\Scripts\Garden.data.sql" />
     <None Include="dbo\Scripts\Crop.data.sql" />
+    <None Include="PostgreSQL\CreateTables.sql" />
+    <None Include="PostgreSQL\LoadData.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />
