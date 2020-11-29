@@ -1,4 +1,8 @@
-﻿CREATE TABLE dbo."Garden"
+﻿DROP TABLE IF EXISTS dbo."CropActivity" CASCADE;
+DROP TABLE IF EXISTS dbo."Crop" CASCADE;
+DROP TABLE IF EXISTS dbo."Garden" CASCADE;
+
+CREATE TABLE dbo."Garden"
 (
     "GardenId" INT GENERATED ALWAYS AS IDENTITY NOT NULL,          
     "GardenName" VARCHAR(60) NOT NULL,
@@ -17,7 +21,7 @@ CREATE TABLE dbo."Crop"
     "Notes" VARCHAR(255) NULL,
     CONSTRAINT "PK_Crop" PRIMARY KEY ("CropId"),
     CONSTRAINT "AK_CropName" UNIQUE ("CropName"),
-    CONSTRAINT "FK_Crop_Garden" FOREIGN KEY ("GardenId") REFERENCES "Garden"("GardenId")
+    CONSTRAINT "FK_Crop_Garden" FOREIGN KEY ("GardenId") REFERENCES dbo."Garden"("GardenId")
 );
 
 CREATE TABLE dbo."CropActivity"
@@ -28,6 +32,6 @@ CREATE TABLE dbo."CropActivity"
     "ActivityDate" TIMESTAMPTZ NOT NULL,
     "Notes" VARCHAR(255) NULL,
     CONSTRAINT "PK_CropActivity" PRIMARY KEY ("CropActivityId"),
-    CONSTRAINT "FK_CropActivity_Crop" FOREIGN KEY ("CropId") REFERENCES "Crop"("CropId"),
+    CONSTRAINT "FK_CropActivity_Crop" FOREIGN KEY ("CropId") REFERENCES dbo."Crop"("CropId"),
     CONSTRAINT "AK_CropActivity_Crop_Activity_Date" UNIQUE ("CropId", "ActivityId", "ActivityDate")
 );
