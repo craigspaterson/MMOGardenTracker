@@ -8,3 +8,4 @@ INSERT INTO dbo."Crop" ("CropId", "CropName", "GardenId", "PlantName", "BeginDat
 INSERT INTO dbo."Crop" ("CropId", "CropName", "GardenId", "PlantName", "BeginDate", "EndDate", "Notes") VALUES (DEFAULT, 'Jalapeno Crop 1', 1, 'Giant Jalapeno', '2018-02-23 17:28:34.812000', '2018-10-15 14:30:00.132000', 'Some sample notes.');
 
 -- CropActivity
+INSERT INTO dbo."CropActivity" ("CropActivityId", "CropId", "ActivityId", "ActivityDate", "Notes") VALUES (DEFAULT, 1, 3, '2019-11-28 18:52:00.760000', null);
