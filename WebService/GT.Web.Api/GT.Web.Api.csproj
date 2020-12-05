@@ -11,9 +11,10 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Projects\Workspace\Magenic\MMO\GardenTracker\WebService\GT.Web.Api\GT.Web.Api.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'GardenTracker' " />
   <ItemGroup>
     <None Remove="GT.Web.Api.xml" />
   </ItemGroup>
