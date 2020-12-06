@@ -1,0 +1,724 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "GT.Web.Api",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/crops": {
+      "get": {
+        "tags": [
+          "Crops"
+        ],
+        "summary": "Gets the crops.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Crop"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Crops"
+        ],
+        "summary": "Posts the crop.",
+        "requestBody": {
+          "description": "The crop.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Crop"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Crop"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Crop"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/crops/{id}": {
+      "get": {
+        "tags": [
+          "Crops"
+        ],
+        "summary": "Gets the crop.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The identifier.",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Crops"
+        ],
+        "summary": "Puts the crop.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The identifier.",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The crop.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Crop"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Crop"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Crop"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Crops"
+        ],
+        "summary": "Deletes the crop.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The identifier.",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/gardens": {
+      "get": {
+        "tags": [
+          "Gardens"
+        ],
+        "summary": "Get a list of gardens.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Garden"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Gardens"
+        ],
+        "summary": "Posts the garden.",
+        "requestBody": {
+          "description": "The garden.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Garden"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Garden"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Garden"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/gardens/{id}": {
+      "get": {
+        "tags": [
+          "Gardens"
+        ],
+        "summary": "Get a single garden.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The identifier.",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Garden"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Gardens"
+        ],
+        "summary": "Updates the garden.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The identifier.",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The garden.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Garden"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Garden"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Garden"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Gardens"
+        ],
+        "summary": "Deletes the garden.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The identifier.",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Activities": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "type": "integer",
+        "description": "Enum Activities",
+        "format": "int32"
+      },
+      "CropActivity": {
+        "required": [
+          "activityDate",
+          "cropId"
+        ],
+        "type": "object",
+        "properties": {
+          "cropActivityId": {
+            "type": "integer",
+            "description": "Gets or sets the crop activity identifier.",
+            "format": "int32"
+          },
+          "cropId": {
+            "type": "integer",
+            "description": "Gets or sets the crop identifier.",
+            "format": "int32"
+          },
+          "activityType": {
+            "$ref": "#/components/schemas/Activities"
+          },
+          "activityDate": {
+            "type": "string",
+            "description": "Gets or sets the activity date.",
+            "format": "date-time"
+          },
+          "notes": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Gets or sets the notes.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class CropActivity."
+      },
+      "Crop": {
+        "required": [
+          "beginDate",
+          "cropName",
+          "gardenId",
+          "plantName"
+        ],
+        "type": "object",
+        "properties": {
+          "gardenId": {
+            "type": "integer",
+            "description": "Gets or sets the garden identifier.",
+            "format": "int32"
+          },
+          "cropId": {
+            "type": "integer",
+            "description": "Gets or sets the crop identifier.",
+            "format": "int32"
+          },
+          "cropName": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Gets or sets the name of the crop."
+          },
+          "plantName": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Gets or sets the name of the plant."
+          },
+          "beginDate": {
+            "type": "string",
+            "description": "Gets or sets the begin date.",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Gets or sets the end date.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "notes": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Gets or sets the notes.",
+            "nullable": true
+          },
+          "cropActivities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CropActivity"
+            },
+            "description": "Gets or sets the crop activities.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class Crop."
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "Garden": {
+        "required": [
+          "gardenName"
+        ],
+        "type": "object",
+        "properties": {
+          "gardenId": {
+            "type": "integer",
+            "description": "Gets or sets the garden identifier.",
+            "format": "int32"
+          },
+          "gardenName": {
+            "maxLength": 60,
+            "type": "string",
+            "description": "Gets or sets the name of the garden."
+          },
+          "crops": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Crop"
+            },
+            "description": "Gets or sets the crops.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class Garden."
+      }
+    }
+  }
+}
