@@ -33,9 +33,9 @@ namespace GT.Web.Api.Mappings
 
             // CropActivity
             CreateMap<CropActivity, CropActivityDto>()
-                .ForMember(dest => dest.ActivityType, src => src.MapFrom("ActivityId"));
+                .ForMember(dest => dest.ActivityType, opt => opt.MapFrom(src => src.ActivityId));
             CreateMap<CropActivityDto, CropActivity>()
-                .ForMember(dest => dest.ActivityId, src => src.MapFrom("ActivityType"))
+                .ForMember(dest => dest.ActivityId, opt => opt.MapFrom(src => src.ActivityType))
                 .ForMember(dest => dest.Crop, opt => opt.Ignore());
 
             // Garden
