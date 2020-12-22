@@ -73,6 +73,7 @@ namespace GT.Web.Api.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>
         [HttpGet("{id}")]
+        [ActionName(nameof(GetGardenAsync))]
         [ProducesResponseType(typeof(Garden), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -163,7 +164,7 @@ namespace GT.Web.Api.Controllers
 
             garden = _mapper.Map<Garden>(gardenEntity);
 
-            return CreatedAtAction("GetGardenAsync", new { id = garden.GardenId }, garden);
+            return CreatedAtAction(nameof(GetGardenAsync),"Gardens", new { id = garden.GardenId }, garden);
         }
 
         // DELETE: api/Gardens/5
