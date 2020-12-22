@@ -5,6 +5,12 @@
     <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
   </PropertyGroup>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>GT.UnitTests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Nowarn>$(NoWarn);1591</Nowarn>
