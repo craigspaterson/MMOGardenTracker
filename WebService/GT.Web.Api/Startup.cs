@@ -1,6 +1,8 @@
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using GT.Domain;
 using GT.Web.Api.Configuration;
+using GT.Web.Api.Validators;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +47,7 @@ namespace GT.Web.Api
             services.AddCors();
 
             services.AddControllers()
+                .AddFluentValidation(opts => opts.RegisterValidatorsFromAssemblyContaining<GardenValidator>())
                 .AddJsonOptions(opts =>
                 {
                     opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));

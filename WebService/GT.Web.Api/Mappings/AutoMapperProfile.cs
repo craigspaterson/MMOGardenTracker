@@ -10,22 +10,6 @@ namespace GT.Web.Api.Mappings
     {
         public AutoMapperProfile()
         {
-            /*
-                ================================================================
-                CropActivity -> CropActivity (Destination member list)
-                GT.Domain.Models.CropActivity -> GT.Web.Api.Models.CropActivity (Destination member list)
-
-                Unmapped properties:
-                ActivityType
-
-                ================================================================
-                CropActivity -> CropActivity (Destination member list)
-                GT.Web.Api.Models.CropActivity -> GT.Domain.Models.CropActivity (Destination member list)
-
-                Unmapped properties:
-                ActivityId
-             */
-
             // Crop
             CreateMap<Crop, CropDto>();
             CreateMap<CropDto, Crop>()
