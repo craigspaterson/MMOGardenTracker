@@ -43,7 +43,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\GT.Common\GT.Common.csproj" />
     <ProjectReference Include="..\..\Domain\GT.Domain\GT.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
 
 

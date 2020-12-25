@@ -2,6 +2,7 @@ using AutoMapper;
 using FluentValidation.AspNetCore;
 using GT.Domain;
 using GT.Web.Api.Configuration;
+using GT.Web.Api.Filters;
 using GT.Web.Api.Validators;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -46,7 +48,10 @@ namespace GT.Web.Api
             // Add CORS
             services.AddCors();
 
-            services.AddControllers()
+            services.AddControllers(opts =>
+                {
+                    opts.Filters.Add(typeof(GlobalExceptionFilter));
+                })
                 .AddFluentValidation(opts =>
                 {
                     opts.RegisterValidatorsFromAssemblyContaining<GardenValidator>(lifetime: ServiceLifetime.Singleton);

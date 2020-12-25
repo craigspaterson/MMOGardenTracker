@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GT.Common.Exceptions;
 
 namespace GT.Domain.Repositories
 {
@@ -48,12 +49,10 @@ namespace GT.Domain.Repositories
 
                 return garden;
             }
-            catch (Exception exception)
+            catch (InvalidOperationException)
             {
-                _logger.LogInformation(exception.Message);
+                throw new NotFoundException($"The Garden with Id: {id} was not found.");
             }
-
-            return null;
         }
 
         public async Task<Garden> PostGardenAsync(Garden garden)
@@ -69,7 +68,7 @@ namespace GT.Domain.Repositories
             {
                 if (GardenExists(garden.GardenId))
                 {
-                    //return new StatusCodeResult(StatusCodes.Status409Conflict);
+                    throw new ConflictException("The Garden already exists.");
                 }
 
                 throw;
