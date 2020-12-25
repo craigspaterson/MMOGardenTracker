@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Security.Cryptography.X509Certificates;
+using FluentValidation;
 using GT.Web.Api.Models;
 
 namespace GT.Web.Api.Validators
@@ -7,27 +8,30 @@ namespace GT.Web.Api.Validators
     {
         public CropValidator()
         {
-            RuleFor(x => x.GardenId)
+            RuleFor(model => model.GardenId)
                 .NotEmpty();
 
-            RuleFor(x => x.CropName)
+            RuleFor(model => model.CropName)
                 .NotEmpty()
                 .MaximumLength(60);
 
-            RuleFor(x => x.PlantName)
+            RuleFor(model => model.PlantName)
                 .NotEmpty()
                 .MaximumLength(60);
 
-            RuleFor(x => x.BeginDate)
+            RuleFor(model => model.BeginDate)
                 .NotNull()
                 .LessThan(x => x.EndDate).When(x => x.EndDate != null);
 
-            RuleFor(x => x.EndDate)
+            RuleFor(model => model.EndDate)
                 .NotNull()
                 .GreaterThan(x => x.BeginDate);
 
-            RuleFor(x => x.Notes)
-                .MaximumLength(250);
+            RuleFor(model => model.Notes)
+                .MaximumLength(255);
+
+            RuleForEach(model => model.CropActivities)
+                .SetValidator(model => new CropActivityValidator());
         }
     }
 }

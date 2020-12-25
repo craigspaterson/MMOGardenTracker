@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -55,6 +56,18 @@ namespace GT.Domain.Repositories
         public async Task<Crop> PostCropAsync(Crop crop)
         {
             _logger.LogInformation("Begin PostCropAsync from CropRepository");
+
+            // Validate the CropActivities
+            if (crop.CropActivities != null)
+            {
+                foreach (var cropCropActivity in crop.CropActivities)
+                {
+                    if (cropCropActivity.ActivityDate < crop.BeginDate || cropCropActivity.ActivityDate > crop.EndDate)
+                    {
+                        throw new ArgumentOutOfRangeException($"ActivityDate", "The Crop Activity Date is out of range.");
+                    }
+                }
+            }
 
             await _context.Crops.AddAsync(crop);
             try

@@ -7,7 +7,7 @@ namespace GT.Web.Api.Validators
     {
         public GardenValidator()
         {
-            RuleFor(x => x.GardenName)
+            RuleFor(model => model.GardenName)
                 .NotEmpty()
                 .MaximumLength(60);
         }

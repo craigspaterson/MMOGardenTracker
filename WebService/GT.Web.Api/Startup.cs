@@ -47,7 +47,12 @@ namespace GT.Web.Api
             services.AddCors();
 
             services.AddControllers()
-                .AddFluentValidation(opts => opts.RegisterValidatorsFromAssemblyContaining<GardenValidator>())
+                .AddFluentValidation(opts =>
+                {
+                    opts.RegisterValidatorsFromAssemblyContaining<GardenValidator>(lifetime: ServiceLifetime.Singleton);
+                    opts.ImplicitlyValidateChildProperties = true;
+                })
+
                 .AddJsonOptions(opts =>
                 {
                     opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
@@ -58,10 +63,10 @@ namespace GT.Web.Api
             // Add AutoMapper
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddDbContextPool<GardenTrackerAppContext>(options =>
+            services.AddDbContextPool<GardenTrackerAppContext>(opts =>
             {
-                // options.UseSqlServer(_configuration.GetConnectionString("GardenTrackerAppConnection"));
-                options.UseNpgsql(_configuration.GetConnectionString("GardenTrackerAppConnection"));
+                // opts.UseSqlServer(_configuration.GetConnectionString("GardenTrackerAppConnection"));
+                opts.UseNpgsql(_configuration.GetConnectionString("GardenTrackerAppConnection"));
             });
 
             // Add Repositories
