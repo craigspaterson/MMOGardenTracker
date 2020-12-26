@@ -1,12 +1,16 @@
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using GT.Domain;
 using GT.Web.Api.Configuration;
+using GT.Web.Api.Filters;
+using GT.Web.Api.Validators;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -44,7 +48,16 @@ namespace GT.Web.Api
             // Add CORS
             services.AddCors();
 
-            services.AddControllers()
+            services.AddControllers(opts =>
+                {
+                    opts.Filters.Add(typeof(GlobalExceptionFilter));
+                })
+                .AddFluentValidation(opts =>
+                {
+                    opts.RegisterValidatorsFromAssemblyContaining<GardenValidator>(lifetime: ServiceLifetime.Singleton);
+                    opts.ImplicitlyValidateChildProperties = true;
+                })
+
                 .AddJsonOptions(opts =>
                 {
                     opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
@@ -55,10 +68,10 @@ namespace GT.Web.Api
             // Add AutoMapper
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddDbContextPool<GardenTrackerAppContext>(options =>
+            services.AddDbContextPool<GardenTrackerAppContext>(opts =>
             {
-                // options.UseSqlServer(_configuration.GetConnectionString("GardenTrackerAppConnection"));
-                options.UseNpgsql(_configuration.GetConnectionString("GardenTrackerAppConnection"));
+                // opts.UseSqlServer(_configuration.GetConnectionString("GardenTrackerAppConnection"));
+                opts.UseNpgsql(_configuration.GetConnectionString("GardenTrackerAppConnection"));
             });
 
             // Add Repositories

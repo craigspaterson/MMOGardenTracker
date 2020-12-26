@@ -1,0 +1,1486 @@
+{
+	"info": {
+		"_postman_id": "8f50ccd7-0707-48b5-8c3a-cecd4decccae",
+		"name": "GT.Web.Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "crops",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Gets the crop.",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/crops/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"crops",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1",
+													"type": "string",
+													"description": "(Required) The identifier."
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/crops/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"crops",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/crops/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"crops",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/crops/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"crops",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										},
+										{
+											"name": "Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/crops/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"crops",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Puts the crop.",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n        {\n            \"activityDate\": \"1963-10-19T18:20:19.836Z\",\n            \"cropId\": -41282797,\n            \"cropActivityId\": -99331073,\n            \"activityType\": 3,\n            \"notes\": \"co\"\n        },\n        {\n            \"activityDate\": \"1978-10-14T13:53:17.775Z\",\n            \"cropId\": 15635492,\n            \"cropActivityId\": -27393979,\n            \"activityType\": 12,\n            \"notes\": \"al\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/crops/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"crops",
+												":id"
+											],
+											"variable": [
+												{
+													"id": "25e99faa-6430-4c62-ae70-f17b0f49cdff",
+													"key": "id",
+													"value": "<integer>",
+													"type": "string",
+													"description": "(Required) The identifier."
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n        {\n            \"activityDate\": \"2000-05-29T17:59:33.500Z\",\n            \"cropId\": 50747065,\n            \"cropActivityId\": -83542307,\n            \"activityType\": 0,\n            \"notes\": \"no\"\n        },\n        {\n            \"activityDate\": \"1991-03-24T22:09:51.508Z\",\n            \"cropId\": -42931856,\n            \"cropActivityId\": 74528563,\n            \"activityType\": 11,\n            \"notes\": \"lab\"\n        }\n    ]\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/crops/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"crops",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n        {\n            \"activityDate\": \"2000-05-29T17:59:33.500Z\",\n            \"cropId\": 50747065,\n            \"cropActivityId\": -83542307,\n            \"activityType\": 0,\n            \"notes\": \"no\"\n        },\n        {\n            \"activityDate\": \"1991-03-24T22:09:51.508Z\",\n            \"cropId\": -42931856,\n            \"cropActivityId\": 74528563,\n            \"activityType\": 11,\n            \"notes\": \"lab\"\n        }\n    ]\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/crops/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"crops",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										},
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n        {\n            \"activityDate\": \"2000-05-29T17:59:33.500Z\",\n            \"cropId\": 50747065,\n            \"cropActivityId\": -83542307,\n            \"activityType\": 0,\n            \"notes\": \"no\"\n        },\n        {\n            \"activityDate\": \"1991-03-24T22:09:51.508Z\",\n            \"cropId\": -42931856,\n            \"cropActivityId\": 74528563,\n            \"activityType\": 11,\n            \"notes\": \"lab\"\n        }\n    ]\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/crops/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"crops",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Error",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n        {\n            \"activityDate\": \"2000-05-29T17:59:33.500Z\",\n            \"cropId\": 50747065,\n            \"cropActivityId\": -83542307,\n            \"activityType\": 0,\n            \"notes\": \"no\"\n        },\n        {\n            \"activityDate\": \"1991-03-24T22:09:51.508Z\",\n            \"cropId\": -42931856,\n            \"cropActivityId\": 74528563,\n            \"activityType\": 11,\n            \"notes\": \"lab\"\n        }\n    ]\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/crops/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"crops",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Deletes the crop.",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/crops/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"crops",
+												":id"
+											],
+											"variable": [
+												{
+													"id": "587e1da0-1d57-41c9-8913-476db7f98b58",
+													"key": "id",
+													"value": "<integer>",
+													"type": "string",
+													"description": "(Required) The identifier."
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/crops/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"crops",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/crops/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"crops",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										},
+										{
+											"name": "Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/crops/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"crops",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										},
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/crops/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"crops",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Gets the crops.",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/crops",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"crops"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/crops",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"crops"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/crops",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"crops"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"beginDate\": \"2013-07-25T00:13:10.641Z\",\n  \"cropName\": \"\",\n  \"gardenId\": 90764425,\n  \"plantName\": \"e\",\n  \"cropId\": 14170177,\n  \"endDate\": \"1944-07-26T13:25:00.371Z\",\n  \"notes\": \"ven\",\n  \"cropActivities\": [\n   {\n    \"activityDate\": \"1941-03-14T03:13:26.028Z\",\n    \"cropId\": 76653445,\n    \"cropActivityId\": -46663915,\n    \"activityType\": 4,\n    \"notes\": \"qu\"\n   },\n   {\n    \"activityDate\": \"1996-06-17T01:14:15.809Z\",\n    \"cropId\": 79742623,\n    \"cropActivityId\": 46265551,\n    \"activityType\": 9,\n    \"notes\": \"ma\"\n   }\n  ]\n },\n {\n  \"beginDate\": \"1954-01-11T01:10:16.820Z\",\n  \"cropName\": \"la\",\n  \"gardenId\": 12714154,\n  \"plantName\": \"iru\",\n  \"cropId\": -12899969,\n  \"endDate\": \"1974-01-24T12:53:08.769Z\",\n  \"notes\": \"in\",\n  \"cropActivities\": [\n   {\n    \"activityDate\": \"1992-11-10T09:38:07.120Z\",\n    \"cropId\": 27048306,\n    \"cropActivityId\": -65487226,\n    \"activityType\": 3,\n    \"notes\": \"i\"\n   },\n   {\n    \"activityDate\": \"2002-11-29T03:41:22.095Z\",\n    \"cropId\": -80758773,\n    \"cropActivityId\": -57100114,\n    \"activityType\": 7,\n    \"notes\": \"ess\"\n   }\n  ]\n }\n]"
+								}
+							]
+						},
+						{
+							"name": "Posts the crop.",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n        {\n            \"activityDate\": \"1963-10-19T18:20:19.836Z\",\n            \"cropId\": -41282797,\n            \"cropActivityId\": -99331073,\n            \"activityType\": 3,\n            \"notes\": \"co\"\n        },\n        {\n            \"activityDate\": \"1978-10-14T13:53:17.775Z\",\n            \"cropId\": 15635492,\n            \"cropActivityId\": -27393979,\n            \"activityType\": 12,\n            \"notes\": \"al\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/crops",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"crops"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n        {\n            \"activityDate\": \"2000-05-29T17:59:33.500Z\",\n            \"cropId\": 50747065,\n            \"cropActivityId\": -83542307,\n            \"activityType\": 0,\n            \"notes\": \"no\"\n        },\n        {\n            \"activityDate\": \"1991-03-24T22:09:51.508Z\",\n            \"cropId\": -42931856,\n            \"cropActivityId\": 74528563,\n            \"activityType\": 11,\n            \"notes\": \"lab\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/crops",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"crops"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+								},
+								{
+									"name": "Conflict",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n        {\n            \"activityDate\": \"2000-05-29T17:59:33.500Z\",\n            \"cropId\": 50747065,\n            \"cropActivityId\": -83542307,\n            \"activityType\": 0,\n            \"notes\": \"no\"\n        },\n        {\n            \"activityDate\": \"1991-03-24T22:09:51.508Z\",\n            \"cropId\": -42931856,\n            \"cropActivityId\": 74528563,\n            \"activityType\": 11,\n            \"notes\": \"lab\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/crops",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"crops"
+											]
+										}
+									},
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n        {\n            \"activityDate\": \"2000-05-29T17:59:33.500Z\",\n            \"cropId\": 50747065,\n            \"cropActivityId\": -83542307,\n            \"activityType\": 0,\n            \"notes\": \"no\"\n        },\n        {\n            \"activityDate\": \"1991-03-24T22:09:51.508Z\",\n            \"cropId\": -42931856,\n            \"cropActivityId\": 74528563,\n            \"activityType\": 11,\n            \"notes\": \"lab\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/crops",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"crops"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+								},
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n        {\n            \"activityDate\": \"2000-05-29T17:59:33.500Z\",\n            \"cropId\": 50747065,\n            \"cropActivityId\": -83542307,\n            \"activityType\": 0,\n            \"notes\": \"no\"\n        },\n        {\n            \"activityDate\": \"1991-03-24T22:09:51.508Z\",\n            \"cropId\": -42931856,\n            \"cropActivityId\": 74528563,\n            \"activityType\": 11,\n            \"notes\": \"lab\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/crops",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"crops"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "gardens",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get a single garden.",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "RequestHeader",
+												"value": "{\"gardenId\":2,\"gardenName\":\"Garden 2\",\"crops\":[{\"gardenId\":1,\"cropId\":2,\"cropName\":\"Jalapeno Crop 1\",\"plantName\":\"Giant Jalapeno\",\"beginDate\":\"2018-02-15T00:00:00\",\"endDate\":\"2018-10-15T00:00:00\",\"notes\":\"Some sample notes.\",\"cropActivities\":[]}]}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/gardens/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"gardens",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "3",
+													"type": "string",
+													"description": "(Required) The identifier."
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/gardens/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"gardens",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"gardenName\": \"<string>\",\n \"gardenId\": \"<integer>\",\n \"crops\": [\n  {\n   \"beginDate\": \"<dateTime>\",\n   \"cropName\": \"<string>\",\n   \"gardenId\": \"<integer>\",\n   \"plantName\": \"<string>\",\n   \"cropId\": \"<integer>\",\n   \"endDate\": \"<dateTime>\",\n   \"notes\": \"<string>\",\n   \"cropActivities\": [\n    {\n     \"activityDate\": \"1947-12-28T09:57:31.740Z\",\n     \"cropId\": -78566607,\n     \"cropActivityId\": 42063105,\n     \"activityType\": 7,\n     \"notes\": \"sint\"\n    },\n    {\n     \"activityDate\": \"1947-09-22T15:59:43.905Z\",\n     \"cropId\": 61942199,\n     \"cropActivityId\": -31303015,\n     \"activityType\": 9,\n     \"notes\": \"u\"\n    }\n   ]\n  },\n  {\n   \"beginDate\": \"<dateTime>\",\n   \"cropName\": \"<string>\",\n   \"gardenId\": \"<integer>\",\n   \"plantName\": \"<string>\",\n   \"cropId\": \"<integer>\",\n   \"endDate\": \"<dateTime>\",\n   \"notes\": \"<string>\",\n   \"cropActivities\": [\n    {\n     \"activityDate\": \"1941-06-15T14:40:04.106Z\",\n     \"cropId\": -90184919,\n     \"cropActivityId\": -21843552,\n     \"activityType\": 1,\n     \"notes\": \"m\"\n    },\n    {\n     \"activityDate\": \"1966-06-04T03:26:14.810Z\",\n     \"cropId\": -53786572,\n     \"cropActivityId\": 10521767,\n     \"activityType\": 12,\n     \"notes\": \"est\"\n    }\n   ]\n  }\n ]\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/gardens/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"gardens",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/gardens/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"gardens",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Updates the garden.",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"gardenName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"crops\": [\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1983-10-03T01:55:31.715Z\",\n                    \"cropId\": 22761894,\n                    \"cropActivityId\": 90173391,\n                    \"activityType\": 2,\n                    \"notes\": \"c\"\n                },\n                {\n                    \"activityDate\": \"1982-06-12T17:24:33.472Z\",\n                    \"cropId\": 24186223,\n                    \"cropActivityId\": 83943688,\n                    \"activityType\": 10,\n                    \"notes\": \"adi\"\n                }\n            ]\n        },\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1984-09-09T09:54:07.206Z\",\n                    \"cropId\": -25239960,\n                    \"cropActivityId\": -70321252,\n                    \"activityType\": 2,\n                    \"notes\": \"Ex\"\n                },\n                {\n                    \"activityDate\": \"2010-03-11T18:00:33.923Z\",\n                    \"cropId\": 14549392,\n                    \"cropActivityId\": -45123554,\n                    \"activityType\": 10,\n                    \"notes\": \"eni\"\n                }\n            ]\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/gardens/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"gardens",
+												":id"
+											],
+											"variable": [
+												{
+													"id": "ff88c6e6-ead1-45a0-b717-a283c5b8242d",
+													"key": "id",
+													"value": "<integer>",
+													"type": "string",
+													"description": "(Required) The identifier."
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"gardenName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"crops\": [\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1947-12-28T09:57:31.740Z\",\n                    \"cropId\": -78566607,\n                    \"cropActivityId\": 42063105,\n                    \"activityType\": 7,\n                    \"notes\": \"sint\"\n                },\n                {\n                    \"activityDate\": \"1947-09-22T15:59:43.905Z\",\n                    \"cropId\": 61942199,\n                    \"cropActivityId\": -31303015,\n                    \"activityType\": 9,\n                    \"notes\": \"u\"\n                }\n            ]\n        },\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1941-06-15T14:40:04.106Z\",\n                    \"cropId\": -90184919,\n                    \"cropActivityId\": -21843552,\n                    \"activityType\": 1,\n                    \"notes\": \"m\"\n                },\n                {\n                    \"activityDate\": \"1966-06-04T03:26:14.810Z\",\n                    \"cropId\": -53786572,\n                    \"cropActivityId\": 10521767,\n                    \"activityType\": 12,\n                    \"notes\": \"est\"\n                }\n            ]\n        }\n    ]\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/gardens/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"gardens",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"gardenName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"crops\": [\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1947-12-28T09:57:31.740Z\",\n                    \"cropId\": -78566607,\n                    \"cropActivityId\": 42063105,\n                    \"activityType\": 7,\n                    \"notes\": \"sint\"\n                },\n                {\n                    \"activityDate\": \"1947-09-22T15:59:43.905Z\",\n                    \"cropId\": 61942199,\n                    \"cropActivityId\": -31303015,\n                    \"activityType\": 9,\n                    \"notes\": \"u\"\n                }\n            ]\n        },\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1941-06-15T14:40:04.106Z\",\n                    \"cropId\": -90184919,\n                    \"cropActivityId\": -21843552,\n                    \"activityType\": 1,\n                    \"notes\": \"m\"\n                },\n                {\n                    \"activityDate\": \"1966-06-04T03:26:14.810Z\",\n                    \"cropId\": -53786572,\n                    \"cropActivityId\": 10521767,\n                    \"activityType\": 12,\n                    \"notes\": \"est\"\n                }\n            ]\n        }\n    ]\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/gardens/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"gardens",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										},
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"gardenName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"crops\": [\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1947-12-28T09:57:31.740Z\",\n                    \"cropId\": -78566607,\n                    \"cropActivityId\": 42063105,\n                    \"activityType\": 7,\n                    \"notes\": \"sint\"\n                },\n                {\n                    \"activityDate\": \"1947-09-22T15:59:43.905Z\",\n                    \"cropId\": 61942199,\n                    \"cropActivityId\": -31303015,\n                    \"activityType\": 9,\n                    \"notes\": \"u\"\n                }\n            ]\n        },\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1941-06-15T14:40:04.106Z\",\n                    \"cropId\": -90184919,\n                    \"cropActivityId\": -21843552,\n                    \"activityType\": 1,\n                    \"notes\": \"m\"\n                },\n                {\n                    \"activityDate\": \"1966-06-04T03:26:14.810Z\",\n                    \"cropId\": -53786572,\n                    \"cropActivityId\": 10521767,\n                    \"activityType\": 12,\n                    \"notes\": \"est\"\n                }\n            ]\n        }\n    ]\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/gardens/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"gardens",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "Deletes the garden.",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/gardens/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"gardens",
+												":id"
+											],
+											"variable": [
+												{
+													"id": "52e901df-409c-473f-b994-4c8b187a464d",
+													"key": "id",
+													"value": "<integer>",
+													"type": "string",
+													"description": "(Required) The identifier."
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/gardens/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"gardens",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										},
+										{
+											"name": "No Content",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/gardens/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"gardens",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/gardens/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"gardens",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										},
+										{
+											"name": "Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/gardens/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"gardens",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+										}
+									]
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Get a list of gardens.",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/gardens",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"gardens"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/gardens",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"gardens"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"gardenName\": \"\",\n  \"gardenId\": -45282692,\n  \"crops\": [\n   {\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n     {\n      \"activityDate\": \"1955-10-13T01:47:54.391Z\",\n      \"cropId\": -81111357,\n      \"cropActivityId\": -61551753,\n      \"activityType\": 6,\n      \"notes\": \"in\"\n     },\n     {\n      \"activityDate\": \"1960-04-02T06:25:40.444Z\",\n      \"cropId\": -46543195,\n      \"cropActivityId\": -46139029,\n      \"activityType\": 7,\n      \"notes\": \"q\"\n     }\n    ]\n   },\n   {\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n     {\n      \"activityDate\": \"2010-09-29T21:40:59.356Z\",\n      \"cropId\": 56761903,\n      \"cropActivityId\": 44160122,\n      \"activityType\": 4,\n      \"notes\": \"ex \"\n     },\n     {\n      \"activityDate\": \"1950-10-12T18:41:25.418Z\",\n      \"cropId\": 85276277,\n      \"cropActivityId\": 23328758,\n      \"activityType\": 5,\n      \"notes\": \"\"\n     }\n    ]\n   }\n  ]\n },\n {\n  \"gardenName\": \"in\",\n  \"gardenId\": 33838142,\n  \"crops\": [\n   {\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n     {\n      \"activityDate\": \"1990-08-20T05:37:33.544Z\",\n      \"cropId\": -58428660,\n      \"cropActivityId\": 14958838,\n      \"activityType\": 5,\n      \"notes\": \"est\"\n     },\n     {\n      \"activityDate\": \"2012-08-06T15:14:04.856Z\",\n      \"cropId\": 73331401,\n      \"cropActivityId\": -14334701,\n      \"activityType\": 8,\n      \"notes\": \"\"\n     }\n    ]\n   },\n   {\n    \"beginDate\": \"<dateTime>\",\n    \"cropName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"plantName\": \"<string>\",\n    \"cropId\": \"<integer>\",\n    \"endDate\": \"<dateTime>\",\n    \"notes\": \"<string>\",\n    \"cropActivities\": [\n     {\n      \"activityDate\": \"1962-11-24T05:10:39.224Z\",\n      \"cropId\": -82954199,\n      \"cropActivityId\": -85694217,\n      \"activityType\": 9,\n      \"notes\": \"ea \"\n     },\n     {\n      \"activityDate\": \"1953-06-21T11:05:24.703Z\",\n      \"cropId\": 63171858,\n      \"cropActivityId\": 31768607,\n      \"activityType\": 7,\n      \"notes\": \"la\"\n     }\n    ]\n   }\n  ]\n }\n]"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/gardens",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"gardens"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Posts the garden.",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "requestHeader",
+										"value": "{\"gardenId\":2,\"gardenName\":\"Garden 2\",\"crops\":[{\"gardenId\":1,\"cropId\":2,\"cropName\":\"Jalapeno Crop 1\",\"plantName\":\"Giant Jalapeno\",\"beginDate\":\"2018-02-15T00:00:00\",\"endDate\":\"2018-10-15T00:00:00\",\"notes\":\"Some sample notes.\",\"cropActivities\":[]}]}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gardenId\": 2,\n    \"gardenName\": \"Garden 2\",\n    \"crops\": [\n        {\n            \"gardenId\": 1,\n            \"cropId\": 2,\n            \"cropName\": \"Jalapeno Crop 1\",\n            \"plantName\": \"Giant Jalapeno\",\n            \"beginDate\": \"2018-02-15T00:00:00-08:00\",\n            \"endDate\": \"2018-10-15T00:00:00-07:00\",\n            \"notes\": \"Some sample notes.\",\n            \"cropActivities\": []\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/gardens",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"gardens"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"gardenName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"crops\": [\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1947-12-28T09:57:31.740Z\",\n                    \"cropId\": -78566607,\n                    \"cropActivityId\": 42063105,\n                    \"activityType\": 7,\n                    \"notes\": \"sint\"\n                },\n                {\n                    \"activityDate\": \"1947-09-22T15:59:43.905Z\",\n                    \"cropId\": 61942199,\n                    \"cropActivityId\": -31303015,\n                    \"activityType\": 9,\n                    \"notes\": \"u\"\n                }\n            ]\n        },\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1941-06-15T14:40:04.106Z\",\n                    \"cropId\": -90184919,\n                    \"cropActivityId\": -21843552,\n                    \"activityType\": 1,\n                    \"notes\": \"m\"\n                },\n                {\n                    \"activityDate\": \"1966-06-04T03:26:14.810Z\",\n                    \"cropId\": -53786572,\n                    \"cropActivityId\": 10521767,\n                    \"activityType\": 12,\n                    \"notes\": \"est\"\n                }\n            ]\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/gardens",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"gardens"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"gardenName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"crops\": [\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1947-12-28T09:57:31.740Z\",\n                    \"cropId\": -78566607,\n                    \"cropActivityId\": 42063105,\n                    \"activityType\": 7,\n                    \"notes\": \"sint\"\n                },\n                {\n                    \"activityDate\": \"1947-09-22T15:59:43.905Z\",\n                    \"cropId\": 61942199,\n                    \"cropActivityId\": -31303015,\n                    \"activityType\": 9,\n                    \"notes\": \"u\"\n                }\n            ]\n        },\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1941-06-15T14:40:04.106Z\",\n                    \"cropId\": -90184919,\n                    \"cropActivityId\": -21843552,\n                    \"activityType\": 1,\n                    \"notes\": \"m\"\n                },\n                {\n                    \"activityDate\": \"1966-06-04T03:26:14.810Z\",\n                    \"cropId\": -53786572,\n                    \"cropActivityId\": 10521767,\n                    \"activityType\": 12,\n                    \"notes\": \"est\"\n                }\n            ]\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/gardens",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"gardens"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+								},
+								{
+									"name": "Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"gardenName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"crops\": [\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1947-12-28T09:57:31.740Z\",\n                    \"cropId\": -78566607,\n                    \"cropActivityId\": 42063105,\n                    \"activityType\": 7,\n                    \"notes\": \"sint\"\n                },\n                {\n                    \"activityDate\": \"1947-09-22T15:59:43.905Z\",\n                    \"cropId\": 61942199,\n                    \"cropActivityId\": -31303015,\n                    \"activityType\": 9,\n                    \"notes\": \"u\"\n                }\n            ]\n        },\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1941-06-15T14:40:04.106Z\",\n                    \"cropId\": -90184919,\n                    \"cropActivityId\": -21843552,\n                    \"activityType\": 1,\n                    \"notes\": \"m\"\n                },\n                {\n                    \"activityDate\": \"1966-06-04T03:26:14.810Z\",\n                    \"cropId\": -53786572,\n                    \"cropActivityId\": 10521767,\n                    \"activityType\": 12,\n                    \"notes\": \"est\"\n                }\n            ]\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/gardens",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"gardens"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Conflict",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"gardenName\": \"<string>\",\n    \"gardenId\": \"<integer>\",\n    \"crops\": [\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1947-12-28T09:57:31.740Z\",\n                    \"cropId\": -78566607,\n                    \"cropActivityId\": 42063105,\n                    \"activityType\": 7,\n                    \"notes\": \"sint\"\n                },\n                {\n                    \"activityDate\": \"1947-09-22T15:59:43.905Z\",\n                    \"cropId\": 61942199,\n                    \"cropActivityId\": -31303015,\n                    \"activityType\": 9,\n                    \"notes\": \"u\"\n                }\n            ]\n        },\n        {\n            \"beginDate\": \"<dateTime>\",\n            \"cropName\": \"<string>\",\n            \"gardenId\": \"<integer>\",\n            \"plantName\": \"<string>\",\n            \"cropId\": \"<integer>\",\n            \"endDate\": \"<dateTime>\",\n            \"notes\": \"<string>\",\n            \"cropActivities\": [\n                {\n                    \"activityDate\": \"1941-06-15T14:40:04.106Z\",\n                    \"cropId\": -90184919,\n                    \"cropActivityId\": -21843552,\n                    \"activityType\": 1,\n                    \"notes\": \"m\"\n                },\n                {\n                    \"activityDate\": \"1966-06-04T03:26:14.810Z\",\n                    \"cropId\": -53786572,\n                    \"cropActivityId\": 10521767,\n                    \"activityType\": 12,\n                    \"notes\": \"est\"\n                }\n            ]\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/gardens",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"gardens"
+											]
+										}
+									},
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"type\": \"nulla nostrud\",\n \"title\": \"Lorem labore eu sed\",\n \"status\": 99167330,\n \"detail\": \"deserunt irure consequat anim\",\n \"instance\": \"Lorem reprehenderit dolor elit\"\n}"
+								}
+							]
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}

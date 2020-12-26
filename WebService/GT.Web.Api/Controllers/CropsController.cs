@@ -73,6 +73,7 @@ namespace GT.Web.Api.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>
         [HttpGet("{id}")]
+        [ActionName(nameof(GetCropAsync))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -154,7 +155,7 @@ namespace GT.Web.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> PostCropAsync([FromBody] Crop crop)
         {
-            _logger.LogInformation("Begin PostGardenAsync");
+            _logger.LogInformation("Begin PostCropAsync");
 
             CropEntity cropEntity = _mapper.Map<CropEntity>(crop);
 
@@ -162,7 +163,7 @@ namespace GT.Web.Api.Controllers
 
             crop = _mapper.Map<Crop>(cropEntity);
 
-            return CreatedAtAction("GetCropAsync", new { id = crop.GardenId }, crop);
+            return CreatedAtAction(nameof(GetCropAsync), "Crops", new { id = crop.GardenId }, crop);
         }
 
         // DELETE: api/Crops/5

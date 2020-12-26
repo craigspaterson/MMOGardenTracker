@@ -4,8 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
+using GT.Common.Exceptions;
 
 namespace GT.Domain.Repositories
 {
@@ -18,6 +20,7 @@ namespace GT.Domain.Repositories
         /// Initializes a new instance of the <see cref="CropRepository"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
+        /// <param name="logger"></param>
         public CropRepository(GardenTrackerAppContext context, ILogger<CropRepository> logger)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
@@ -44,17 +47,27 @@ namespace GT.Domain.Repositories
 
                 return crop;
             }
-            catch (Exception exception)
+            catch (InvalidOperationException)
             {
-                _logger.LogInformation(exception.Message);
+                throw new NotFoundException($"The Crop with Id: {id} was not found.");
             }
-
-            return null;
         }
 
         public async Task<Crop> PostCropAsync(Crop crop)
         {
             _logger.LogInformation("Begin PostCropAsync from CropRepository");
+
+            // Validate the CropActivities
+            if (crop.CropActivities != null)
+            {
+                foreach (var cropCropActivity in crop.CropActivities)
+                {
+                    if (cropCropActivity.ActivityDate < crop.BeginDate || cropCropActivity.ActivityDate > crop.EndDate)
+                    {
+                        throw new BadRequestException("The Crop Activity Date is out of range.");
+                    }
+                }
+            }
 
             await _context.Crops.AddAsync(crop);
             try
@@ -65,7 +78,7 @@ namespace GT.Domain.Repositories
             {
                 if (CropExists(crop.CropId))
                 {
-                    //return new StatusCodeResult(StatusCodes.Status409Conflict);
+                    throw new ConflictException("The Crop already exists.");
                 }
 
                 throw;
