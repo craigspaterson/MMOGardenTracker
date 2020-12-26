@@ -12,11 +12,15 @@ namespace GT.Web.Api.Mappings
         {
             // Crop
             CreateMap<Crop, CropDto>();
-            CreateMap<CropDto, Crop>();
+            CreateMap<CropDto, Crop>()
+                .ForMember(dest => dest.Garden, opt => opt.Ignore());
 
             // CropActivity
-            CreateMap<CropActivity, CropActivityDto>();
-            CreateMap<CropActivityDto, CropActivity>();
+            CreateMap<CropActivity, CropActivityDto>()
+                .ForMember(dest => dest.ActivityType, opt => opt.MapFrom(src => src.ActivityId));
+            CreateMap<CropActivityDto, CropActivity>()
+                .ForMember(dest => dest.ActivityId, opt => opt.MapFrom(src => src.ActivityType))
+                .ForMember(dest => dest.Crop, opt => opt.Ignore());
 
             // Garden
             CreateMap<Garden, GardenDto>();
