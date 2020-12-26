@@ -136,6 +136,7 @@ namespace GT.UnitTests.WebApi.Validators
             result.ShouldNotHaveValidationErrorFor(actual => actual.BeginDate);
             result.ShouldNotHaveValidationErrorFor(actual => actual.EndDate);
             result.ShouldNotHaveValidationErrorFor(actual => actual.Notes);
+            _validator.ShouldHaveChildValidator(x => x.CropActivities, typeof(CropActivityValidator));
             //result.ShouldHaveValidationErrorFor(actual => actual.CropActivities[0].ActivityDate);
         }
     }
