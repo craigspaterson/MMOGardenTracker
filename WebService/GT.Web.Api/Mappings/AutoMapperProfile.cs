@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using GT.Domain.Models;
-using CropDto = GT.Web.Api.Models.Crop;
 using CropActivityDto = GT.Web.Api.Models.CropActivity;
+using CropDto = GT.Web.Api.Models.Crop;
 using GardenDto = GT.Web.Api.Models.Garden;
 
 namespace GT.Web.Api.Mappings

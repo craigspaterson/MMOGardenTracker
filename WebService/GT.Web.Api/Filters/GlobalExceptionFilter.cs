@@ -16,33 +16,18 @@ namespace GT.Web.Api.Filters
                 return;
             }
 
-            int statusCode;
-
             var exception = context.Exception;
-            switch (exception)
+
+            var statusCode = exception switch
             {
-                case ArgumentNullException _:
-                    statusCode = StatusCodes.Status400BadRequest;
-                    break;
-                case ArgumentOutOfRangeException _:
-                    statusCode = StatusCodes.Status400BadRequest;
-                    break;
-                case ArgumentException _:
-                    statusCode = StatusCodes.Status400BadRequest;
-                    break;
-                case BadRequestException _:
-                    statusCode = StatusCodes.Status400BadRequest;
-                    break;
-                case NotFoundException _:
-                    statusCode = StatusCodes.Status404NotFound;
-                    break;
-                case ConflictException _:
-                    statusCode = StatusCodes.Status409Conflict;
-                    break;
-                default:
-                    statusCode = StatusCodes.Status500InternalServerError;
-                    break;
-            }
+                ArgumentNullException _ => StatusCodes.Status400BadRequest,
+                ArgumentOutOfRangeException _ => StatusCodes.Status400BadRequest,
+                ArgumentException _ => StatusCodes.Status400BadRequest,
+                BadRequestException _ => StatusCodes.Status400BadRequest,
+                NotFoundException _ => StatusCodes.Status404NotFound,
+                ConflictException _ => StatusCodes.Status409Conflict,
+                _ => StatusCodes.Status500InternalServerError
+            };
 
             var response = context.HttpContext.Response;
             response.StatusCode = statusCode;
@@ -54,7 +39,11 @@ namespace GT.Web.Api.Filters
                 StatusCode = statusCode
             };
 
-            var json = JsonSerializer.Serialize(errorDetails);
+            var json = JsonSerializer.Serialize<ErrorDetails>(errorDetails, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            });
 
             response.WriteAsync(json);
         }
