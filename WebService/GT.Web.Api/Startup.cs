@@ -80,6 +80,24 @@ namespace GT.Web.Api
             // Add Swagger
             services.AddSwaggerGen(opts =>
             {
+                opts.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "GardenTracker API",
+                    Version = "v1",
+                    Description = "An API to perform GardenTracker operations",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Support",
+                        Email = "support@blackhawkstudios.com",
+                        Url = new Uri("https://www.blackhawkstudios.com"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "License",
+                        Url = new Uri("https://www.blackhawkstudios.com/license"),
+                    }
+                });
                 opts.DescribeAllParametersInCamelCase();
                 opts.IgnoreObsoleteActions();
                 opts.IgnoreObsoleteProperties();

@@ -106,6 +106,15 @@ namespace GT.Domain.Repositories
 
                 throw;
             }
+            catch (DbUpdateException)
+            {
+                if (GardenNameExists(garden.GardenName))
+                {
+                    throw new ConflictException("The Garden Name already exists.");
+                }
+
+                throw;
+            }
 
             return garden;
         }
