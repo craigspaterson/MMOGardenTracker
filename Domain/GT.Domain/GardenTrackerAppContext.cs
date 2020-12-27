@@ -40,7 +40,8 @@ namespace GT.Domain
             modelBuilder.Entity<Crop>()
                 .HasOne(c => c.Garden)
                 .WithMany(g => g.Crops)
-                .HasForeignKey(c => c.CropId);
+                .HasForeignKey(c => c.CropId)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             // CropActivity properties
             modelBuilder.Entity<CropActivity>().ToTable("CropActivity").HasKey(x => x.CropActivityId);
