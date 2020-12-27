@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using GT.Common.Exceptions;
@@ -53,9 +52,9 @@ namespace GT.Domain.Repositories
             }
         }
 
-        public async Task<Crop> PostCropAsync(Crop crop)
+        public async Task<Crop> CreateCropAsync(Crop crop)
         {
-            _logger.LogInformation("Begin PostCropAsync from CropRepository");
+            _logger.LogInformation("Begin CreateCropAsync from CropRepository");
 
             // Validate the CropActivities
             if (crop.CropActivities != null)
@@ -87,13 +86,13 @@ namespace GT.Domain.Repositories
             return crop;
         }
 
-        public async Task<Crop> PutCropAsync(int id, Crop crop)
+        public async Task<Crop> UpdateCropAsync(int id, Crop crop)
         {
-            _logger.LogInformation("Begin PutCropAsync from CropRepository");
+            _logger.LogInformation("Begin UpdateCropAsync from CropRepository");
 
             if (id != crop.CropId)
             {
-                return null;
+                throw new BadRequestException($"The Crop with Id: {id} was not found.");
             }
 
             _context.Entry(crop).State = EntityState.Modified;
@@ -102,11 +101,11 @@ namespace GT.Domain.Repositories
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateException)
             {
                 if (!CropExists(id))
                 {
-                    //return NotFound();
+                    throw new NotFoundException($"The Crop with Id: {id} was not found.");
                 }
 
                 throw;

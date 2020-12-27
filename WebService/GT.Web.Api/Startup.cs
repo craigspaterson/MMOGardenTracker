@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -140,6 +139,8 @@ namespace GT.Web.Api
             });
         }
 
+        #region Versioning
+
         /// <summary>
         /// Class RemoveVersionFromParameter.
         /// Implements the <see cref="Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter" />
@@ -181,5 +182,7 @@ namespace GT.Web.Api
                 swaggerDoc.Paths = paths;
             }
         }
+
+        #endregion
     }
 }

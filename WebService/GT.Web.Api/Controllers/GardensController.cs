@@ -121,7 +121,7 @@ namespace GT.Web.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> PutGardenAsync([FromRoute] int id, [FromBody] Garden garden)
         {
-            _logger.LogInformation("Begin PutGardenAsync");
+            _logger.LogInformation("Begin UpdateGardenAsync");
 
             if (id != garden.GardenId)
             {
@@ -130,7 +130,7 @@ namespace GT.Web.Api.Controllers
 
             GardenEntity gardenEntity = _mapper.Map<GardenEntity>(garden);
 
-            gardenEntity = await _gardenRepository.PutGardenAsync(id, gardenEntity);
+            gardenEntity = await _gardenRepository.UpdateGardenAsync(id, gardenEntity);
 
             if (gardenEntity != null)
             {
@@ -156,11 +156,11 @@ namespace GT.Web.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> PostGardenAsync([FromBody] Garden garden)
         {
-            _logger.LogInformation("Begin PostGardenAsync");
+            _logger.LogInformation("Begin CreateGardenAsync");
 
             GardenEntity gardenEntity = _mapper.Map<GardenEntity>(garden);
 
-            gardenEntity = await _gardenRepository.PostGardenAsync(gardenEntity);
+            gardenEntity = await _gardenRepository.CreateGardenAsync(gardenEntity);
 
             garden = _mapper.Map<Garden>(gardenEntity);
 
