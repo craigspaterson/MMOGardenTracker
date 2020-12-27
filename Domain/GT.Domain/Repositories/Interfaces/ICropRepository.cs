@@ -9,6 +9,10 @@ namespace GT.Domain.Repositories.Interfaces
     /// </summary>
     public interface ICropRepository
     {
+        //Task<IEnumerable<Crop>> GetAllCropsAsync();
+        //Task<Crop> GetCropByIdAsync(int id);
+        //Task<Crop> GetCropWithDetailsAsync(int id);
+
         /// <summary>
         /// Gets the crops asynchronous.
         /// </summary>
@@ -23,19 +27,19 @@ namespace GT.Domain.Repositories.Interfaces
         Task<Crop> GetCropAsync(int id);
 
         /// <summary>
-        /// Posts the crop asynchronous.
+        /// Creates the crop asynchronous.
         /// </summary>
         /// <param name="crop">The crop.</param>
         /// <returns>Task&lt;Crop&gt;.</returns>
-        Task<Crop> PostCropAsync(Crop crop);
+        Task<Crop> CreateCropAsync(Crop crop);
 
         /// <summary>
-        /// Puts the crop asynchronous.
+        /// Updates the crop asynchronous.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="crop">The crop.</param>
         /// <returns>Task&lt;Crop&gt;.</returns>
-        Task<Crop> PutCropAsync(int id, Crop crop);
+        Task<Crop> UpdateCropAsync(int id, Crop crop);
 
         /// <summary>
         /// Deletes the crop asynchronous.

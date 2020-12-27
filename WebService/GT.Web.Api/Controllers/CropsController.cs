@@ -120,7 +120,7 @@ namespace GT.Web.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> PutCropAsync([FromRoute] int id, [FromBody] Crop crop)
         {
-            _logger.LogInformation("Begin PutCropAsync");
+            _logger.LogInformation("Begin UpdateCropAsync");
 
             if (id != crop.CropId)
             {
@@ -129,7 +129,7 @@ namespace GT.Web.Api.Controllers
 
             CropEntity cropEntity = _mapper.Map<CropEntity>(crop);
 
-            cropEntity = await _cropRepository.PutCropAsync(id, cropEntity);
+            cropEntity = await _cropRepository.UpdateCropAsync(id, cropEntity);
 
             if (cropEntity != null)
             {
@@ -155,11 +155,11 @@ namespace GT.Web.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> PostCropAsync([FromBody] Crop crop)
         {
-            _logger.LogInformation("Begin PostCropAsync");
+            _logger.LogInformation("Begin CreateCropAsync");
 
             CropEntity cropEntity = _mapper.Map<CropEntity>(crop);
 
-            cropEntity = await _cropRepository.PostCropAsync(cropEntity);
+            cropEntity = await _cropRepository.CreateCropAsync(cropEntity);
 
             crop = _mapper.Map<Crop>(cropEntity);
 

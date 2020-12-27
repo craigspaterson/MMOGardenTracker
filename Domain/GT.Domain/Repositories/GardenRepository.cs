@@ -55,9 +55,9 @@ namespace GT.Domain.Repositories
             }
         }
 
-        public async Task<Garden> PostGardenAsync(Garden garden)
+        public async Task<Garden> CreateGardenAsync(Garden garden)
         {
-            _logger.LogInformation("Begin PostGardenAsync from GardenRepository");
+            _logger.LogInformation("Begin CreateGardenAsync from GardenRepository");
 
             await _context.Gardens.AddAsync(garden);
             try
@@ -71,15 +71,20 @@ namespace GT.Domain.Repositories
                     throw new ConflictException("The Garden already exists.");
                 }
 
+                if (GardenNameExists(garden.GardenName))
+                {
+                    throw new ConflictException("The Garden Name already exists.");
+                }
+
                 throw;
             }
 
             return garden;
         }
 
-        public async Task<Garden> PutGardenAsync(int id, Garden garden)
+        public async Task<Garden> UpdateGardenAsync(int id, Garden garden)
         {
-            _logger.LogInformation("Begin PutGardenAsync from GardenRepository");
+            _logger.LogInformation("Begin UpdateGardenAsync from GardenRepository");
 
             if (id != garden.GardenId)
             {
@@ -96,7 +101,7 @@ namespace GT.Domain.Repositories
             {
                 if (!GardenExists(id))
                 {
-                    //return NotFound();
+                    throw new NotFoundException($"The Garden with Id: {id} was not found.");
                 }
 
                 throw;
@@ -120,6 +125,11 @@ namespace GT.Domain.Repositories
         private bool GardenExists(int id)
         {
             return _context.Gardens.Any(e => e.GardenId == id);
+        }
+
+        private bool GardenNameExists(string gardenName)
+        {
+            return _context.Gardens.Any(e => e.GardenName == gardenName);
         }
     }
 }

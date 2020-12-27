@@ -23,19 +23,19 @@ namespace GT.Domain.Repositories.Interfaces
         Task<Garden> GetGardenAsync(int id);
 
         /// <summary>
-        /// Posts the garden asynchronous.
+        /// Creates the garden asynchronous.
         /// </summary>
         /// <param name="garden">The garden.</param>
-        /// <returns>Task&lt;Crop&gt;.</returns>
-        Task<Garden> PostGardenAsync(Garden garden);
+        /// <returns>Task&lt;Garden&gt;.</returns>
+        Task<Garden> CreateGardenAsync(Garden garden);
 
         /// <summary>
-        /// Puts the garden asynchronous.
+        /// Updates the garden asynchronous.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="garden">The garden.</param>
-        /// <returns>Task&lt;Crop&gt;.</returns>
-        Task<Garden> PutGardenAsync(int id, Garden garden);
+        /// <returns>Task&lt;Garden&gt;.</returns>
+        Task<Garden> UpdateGardenAsync(int id, Garden garden);
 
         /// <summary>
         /// Deletes the garden asynchronous.
