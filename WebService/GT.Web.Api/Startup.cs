@@ -85,7 +85,7 @@ namespace GT.Web.Api
                     Title = "GardenTracker API",
                     Version = "v1",
                     Description = "An API to perform GardenTracker operations",
-                    TermsOfService = new Uri("https://example.com/terms"),
+                    TermsOfService = new Uri("https://www.blackhawkstudios.com/terms"),
                     Contact = new OpenApiContact
                     {
                         Name = "Support",
