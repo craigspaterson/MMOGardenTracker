@@ -4,11 +4,19 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 
 namespace GT.Web.Api.Filters
 {
     public class GlobalExceptionFilter : IExceptionFilter
     {
+        private readonly ILogger _logger;
+
+        public GlobalExceptionFilter(ILogger<GlobalExceptionFilter> logger)
+        {
+            _logger = logger;
+        }
+
         public void OnException(ExceptionContext context)
         {
             if (context == null)
@@ -17,6 +25,7 @@ namespace GT.Web.Api.Filters
             }
 
             var exception = context.Exception;
+            _logger.LogError(exception.Message);
 
             var statusCode = exception switch
             {
