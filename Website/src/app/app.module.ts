@@ -10,9 +10,6 @@ import { CropsComponent } from './crops/crops.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
-
 import { environment } from '../environments/environment';
 import { GardensComponent } from './gardens/gardens.component';
 import { CropDetailComponent } from './crops/crop-detail.component';
