@@ -59,7 +59,6 @@ describe('CropService', () => {
 
     // Mock the response data
     const mockData: Crop = {
-      id: 1,
       gardenId: 1,
       cropId: 1,
       cropName: 'Tomato Crop 1',
@@ -106,7 +105,6 @@ describe('CropService', () => {
     // Mock the response data
     const mockData: Crop[] = [
       {
-        id: 1,
         gardenId: 1,
         cropId: 1,
         cropName: 'Tomato Crop 1',
