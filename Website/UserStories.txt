@@ -3,7 +3,7 @@ format (seed, bulb, ryzome, clone)
 location
 container/plot type
 quantity
-in gound, raised bed, container, hydoponic
+in gound, raised bed, container, hydroponic
 
 activity 
 (
