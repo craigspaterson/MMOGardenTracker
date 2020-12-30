@@ -9,9 +9,6 @@ namespace GT.Web.Api.Validators
         //public CropActivityValidator(Crop parent)
         public CropActivityValidator()
         {
-            RuleFor(model => model.CropId)
-                .NotEmpty();
-
             RuleFor(model => model.ActivityType)
                 .NotNull()
                 .IsInEnum();
