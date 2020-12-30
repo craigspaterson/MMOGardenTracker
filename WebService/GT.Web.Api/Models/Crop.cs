@@ -13,7 +13,6 @@ namespace GT.Web.Api.Models
         /// Gets or sets the garden identifier.
         /// </summary>
         /// <value>The garden identifier.</value>
-        [Required]
         public int GardenId { get; set; }
 
         /// <summary>

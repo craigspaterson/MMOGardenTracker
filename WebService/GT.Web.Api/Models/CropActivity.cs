@@ -18,7 +18,6 @@ namespace GT.Web.Api.Models
         /// Gets or sets the crop identifier.
         /// </summary>
         /// <value>The crop identifier.</value>
-        [Required]
         public int CropId { get; set; }
 
         /// <summary>
