@@ -25,9 +25,12 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@ngtools/webpack": "^11.0.5",
+    "@types/bootstrap": "^5.0.1",
+    "@types/jqueryui": "^1.12.14",
     "bootstrap": "^4.5.3",
     "core-js": "^3.8.1",
     "jquery": "^3.5.1",
+    "jqueryui": "^1.11.1",
     "ngx-bootstrap": "^6.2.0",
     "rxjs": "^6.6.3"
   },
