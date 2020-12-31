@@ -28,31 +28,41 @@ export class CropService {
   getCrops(): Observable<Crop[]> {
     return this.http
       .get<Crop[]>(this.url, httpOptions)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   getCropByCropId(cropId: number): Observable<Crop> {
     return this.http
       .get<Crop>(this.url + `/${cropId}`, httpOptions)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   postCrop(crop: Crop): Observable<Crop> {
     return this.http
       .post<Crop>(this.url, crop, httpOptions)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   putCrop(cropId: number, crop: Crop): Observable<Crop> {
     return this.http
       .put<Crop>(this.url + `/${cropId}`, crop, httpOptions)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   deleteCrop(cropId: number): Observable<{}> {
     return this.http
       .delete(this.url + `/${cropId}`, httpOptions)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -66,10 +76,6 @@ export class CropService {
         `Backend returned code ${error.status}, ` + `body was: ${error.error}`
       );
     }
-
-    console.log(`The error status: ${error.status}`);
-    console.log(`The error message: ${error.message}`);
-    console.table(error);
 
     // return an observable with a user-facing error message
     return throwError('Something bad happened; please try again later.');
