@@ -73,7 +73,7 @@ export class CropDetailComponent implements OnInit {
   }
 
   public saveCrop(crop: Crop): void {
-    console.log(crop);
+    console.table(crop);
 
     if (crop) {
       // TODO: Remove after replacing in memory db

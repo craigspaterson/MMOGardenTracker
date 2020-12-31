@@ -30,7 +30,7 @@ export class CropsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private cropService: CropService
-  ) {}
+  ) { }
 
   private cropsSubscription: Subscription;
 
@@ -55,9 +55,13 @@ export class CropsComponent implements OnInit, OnDestroy {
     this.router.navigate([`/crops/crop/${cropId}`]);
   }
 
-  onDeleteClick(cropId: number): void {}
+  onDeleteClick(cropId: number): void {
+    this.cropService
+      .deleteCrop(cropId)
+      .subscribe();
+  }
 
-  onAscendingSortClick(cropId: number): void {}
+  onAscendingSortClick(cropId: number): void { }
 
-  onDescendingSortClick(cropId: number): void {}
+  onDescendingSortClick(cropId: number): void { }
 }
