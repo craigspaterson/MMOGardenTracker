@@ -69,6 +69,11 @@ namespace GT.Domain.Repositories
             }
 
             await _context.Crops.AddAsync(crop);
+            //foreach (var cropCropActivity in crop.CropActivities)
+            //{
+            //    _context.ChangeTracker.TrackGraph(cropCropActivity, e => e.Entry.State = EntityState.Added);
+            //}
+
             try
             {
                 await _context.SaveChangesAsync();

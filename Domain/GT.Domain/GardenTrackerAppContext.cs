@@ -25,12 +25,12 @@ namespace GT.Domain
 
             // Garden properties
             modelBuilder.Entity<Garden>().ToTable("Garden").HasKey(x => x.GardenId);
-            modelBuilder.Entity<Garden>().Property(x => x.GardenId).HasColumnName("GardenId");
+            modelBuilder.Entity<Garden>().Property(x => x.GardenId).HasColumnName("GardenId").ValueGeneratedOnAdd();
             modelBuilder.Entity<Garden>().Property(x => x.GardenName).HasColumnName("GardenName");
 
             // Crop properties
             modelBuilder.Entity<Crop>().ToTable("Crop").HasKey(x => x.CropId);
-            modelBuilder.Entity<Crop>().Property(x => x.CropId).HasColumnName("CropId");
+            modelBuilder.Entity<Crop>().Property(x => x.CropId).HasColumnName("CropId").ValueGeneratedOnAdd();
             modelBuilder.Entity<Crop>().Property(x => x.CropName).HasColumnName("CropName");
             modelBuilder.Entity<Crop>().Property(x => x.PlantName).HasColumnName("PlantName");
             modelBuilder.Entity<Crop>().Property(x => x.BeginDate).HasColumnName("BeginDate");
@@ -45,7 +45,7 @@ namespace GT.Domain
 
             // CropActivity properties
             modelBuilder.Entity<CropActivity>().ToTable("CropActivity").HasKey(x => x.CropActivityId);
-            modelBuilder.Entity<CropActivity>().Property(x => x.CropActivityId).HasColumnName("CropActivityId");
+            modelBuilder.Entity<CropActivity>().Property(x => x.CropActivityId).HasColumnName("CropActivityId").ValueGeneratedOnAdd();
             modelBuilder.Entity<CropActivity>().Property(x => x.ActivityId).HasColumnName("ActivityId");
             modelBuilder.Entity<CropActivity>().Property(x => x.ActivityDate).HasColumnName("ActivityDate");
             modelBuilder.Entity<CropActivity>().Property(x => x.Notes).HasColumnName("Notes");

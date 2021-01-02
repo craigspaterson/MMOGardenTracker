@@ -5,7 +5,7 @@ SET NOCOUNT ON
 SET IDENTITY_INSERT [dbo].[Garden] ON
 GO
 DECLARE @Data TABLE (
-   [GardenId]   [INT]               NOT NULL,
+   [GardenId]   [INT] NOT NULL,
    [GardenName] [NVARCHAR](60) NOT NULL
    PRIMARY KEY ([GardenId])
 );
