@@ -1,7 +1,12 @@
 import { CropActivity } from './crop-activity';
 
+/**
+ *
+ *
+ * @export
+ * @class Crop
+ */
 export class Crop {
-  // id: number;
   gardenId: number;
   cropId: number;
   cropName: string;

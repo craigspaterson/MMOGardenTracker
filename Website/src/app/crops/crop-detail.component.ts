@@ -6,6 +6,13 @@ import { GardenService } from '../gardens/garden.service';
 import { Crop } from './crop';
 import { Garden } from '../gardens/garden';
 
+/**
+ *
+ *
+ * @export
+ * @class CropDetailComponent
+ * @implements {OnInit}
+ */
 @Component({
   selector: 'app-crop-detail',
   templateUrl: './crop-detail.component.html',
@@ -22,7 +29,7 @@ export class CropDetailComponent implements OnInit {
     private router: Router,
     private cropService: CropService,
     private gardenService: GardenService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.cropId = +this.route.snapshot.paramMap.get('id');
@@ -72,14 +79,13 @@ export class CropDetailComponent implements OnInit {
       );
   }
 
+  /**
+   *
+   *
+   * @param {Crop} crop
+   * @memberof CropDetailComponent
+   */
   public saveCrop(crop: Crop): void {
-    console.table(crop);
-
-    if (crop) {
-      // TODO: Remove after replacing in memory db
-      // crop.cropId = crop.cropId;
-    }
-
     if (this.cropId) {
       this.updateCrop(this.cropId, crop);
     } else {
