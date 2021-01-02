@@ -9,8 +9,8 @@ DECLARE @Data TABLE (
     [CropName] NVARCHAR(60) NOT NULL,
     [GardenId] INT NOT NULL, 
     [PlantName] NVARCHAR(60) NOT NULL, 
-    [BeginDate] DATETIME2 NOT NULL,
-    [EndDate] DATETIME2 NULL,
+    [BeginDate] DATETIMEOFFSET NOT NULL,
+    [EndDate] DATETIMEOFFSET NULL,
     [Notes] NVARCHAR(255) NULL
    PRIMARY KEY ([CropId])
 );
