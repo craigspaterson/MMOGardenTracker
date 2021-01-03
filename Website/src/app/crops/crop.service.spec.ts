@@ -1,7 +1,4 @@
-// Required for all Angular tests
 import { TestBed, inject } from '@angular/core/testing';
-
-// Required for mocking HTTP requests
 import {
   HttpClientTestingModule,
   HttpTestingController
@@ -35,9 +32,9 @@ describe('CropService', () => {
     httpTestingController.verify();
   });
 
-  // it('should be created', inject([CropService], (service: CropService) => {
-  //   expect(service).toBeTruthy();
-  // }));
+  it('should be created', inject([CropService], (service: CropService) => {
+    expect(service).toBeTruthy();
+  }));
 
   // Initialization
   describe('initialization', () => {
@@ -58,7 +55,7 @@ describe('CropService', () => {
     const testUrl = '/api/crops';
 
     // Mock the response data
-    const mockData: Crop = {
+    const mockResponse: Crop = {
       gardenId: 1,
       cropId: 1,
       cropName: 'Tomato Crop 1',
@@ -81,7 +78,7 @@ describe('CropService', () => {
       // Make an HTTP GET request
       httpClient.get<Crop>(testUrl).subscribe(data =>
         // When observable resolves, result should match mock data
-        expect(data).toEqual(mockData)
+        expect(data).toEqual(mockResponse)
       );
 
       // The following `expectOne()` will match the request's URL.
@@ -94,7 +91,7 @@ describe('CropService', () => {
 
       // Respond with mock data, causing Observable to resolve.
       // Subscribe callback asserts that correct data was returned.
-      req.flush(mockData);
+      req.flush(mockResponse);
     });
   });
 
@@ -103,7 +100,7 @@ describe('CropService', () => {
     const cropId = 1;
 
     // Mock the response data
-    const mockData: Crop[] = [
+    const mockResponse: Crop[] = [
       {
         gardenId: 1,
         cropId: 1,
@@ -127,8 +124,8 @@ describe('CropService', () => {
     it('should make a GET request', () => {
       // Make an HTTP GET request
       httpClient.get<Crop[]>(testUrl + `/${cropId}`).subscribe(data => {
-        expect(data).toEqual(mockData);
-        expect(data[0].cropId).toEqual(mockData[0].cropId);
+        expect(data).toEqual(mockResponse);
+        expect(data[0].cropId).toEqual(mockResponse[0].cropId);
         expect(data[0].cropId).toEqual(cropId);
       });
 
@@ -142,7 +139,7 @@ describe('CropService', () => {
 
       // Respond with mock data, causing Observable to resolve.
       // Subscribe callback asserts that correct data was returned.
-      req.flush(mockData);
+      req.flush(mockResponse);
     });
   });
 });
