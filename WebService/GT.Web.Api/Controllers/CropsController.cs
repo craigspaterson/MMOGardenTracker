@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using CropEntity = GT.Domain.Models.Crop;
 
 namespace GT.Web.Api.Controllers
@@ -36,7 +38,7 @@ namespace GT.Web.Api.Controllers
             _cropRepository = cropRepository;
         }
 
-        // GET: api/Crops
+        // GET: api/crops
         /// <summary>
         /// Gets the crops.
         /// </summary>
@@ -44,9 +46,10 @@ namespace GT.Web.Api.Controllers
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
         [HttpGet]
+        [ActionName(nameof(GetCropsAsync))]
         [ProducesResponseType(typeof(List<Crop>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IList<Crop>> GetCropsAsync()
+        public async Task<IActionResult> GetCropsAsync()
         {
             _logger.LogInformation("Begin GetCropsAsync");
 
@@ -60,10 +63,10 @@ namespace GT.Web.Api.Controllers
                 crops = _mapper.Map<IList<Crop>>(cropEntities);
             }
 
-            return crops;
+            return Ok(crops);
         }
 
-        // GET: api/Crops/5
+        // GET: api/crops/5
         /// <summary>
         /// Gets the crop.
         /// </summary>
@@ -78,7 +81,7 @@ namespace GT.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetCropAsync([FromRoute] int id)
+        public async Task<IActionResult> GetCropAsync([FromRoute(Name = "id"), Required] int id)
         {
             _logger.LogInformation("Begin GetCropAsync");
 
@@ -103,7 +106,7 @@ namespace GT.Web.Api.Controllers
             return Ok(cropDto);
         }
 
-        // PUT: api/Crops/5
+        // PUT: api/crops/5
         /// <summary>
         /// Puts the crop.
         /// </summary>
@@ -113,12 +116,13 @@ namespace GT.Web.Api.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>
         [HttpPut("{id}")]
+        [ActionName(nameof(PutCropAsync))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> PutCropAsync([FromRoute] int id, [FromBody] Crop crop)
+        public async Task<IActionResult> PutCropAsync([FromRoute(Name = "id"), Required] int id, [FromBody] Crop crop)
         {
             _logger.LogInformation("Begin UpdateCropAsync");
 
@@ -140,7 +144,7 @@ namespace GT.Web.Api.Controllers
             return Ok(crop);
         }
 
-        // POST: api/Crops
+        // POST: api/crops
         /// <summary>
         /// Posts the crop.
         /// </summary>
@@ -149,6 +153,7 @@ namespace GT.Web.Api.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="409">Conflict</response>
         [HttpPost]
+        [ActionName(nameof(PostCropAsync))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -166,7 +171,7 @@ namespace GT.Web.Api.Controllers
             return CreatedAtAction(nameof(GetCropAsync), "Crops", new { id = crop.GardenId }, crop);
         }
 
-        // DELETE: api/Crops/5
+        // DELETE: api/crops/5
         /// <summary>
         /// Deletes the crop.
         /// </summary>
@@ -175,17 +180,53 @@ namespace GT.Web.Api.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>
         [HttpDelete("{id}")]
+        [ActionName(nameof(DeleteCropAsync))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> DeleteCropAsync([FromRoute] int id)
+        public async Task<IActionResult> DeleteCropAsync([FromRoute(Name = "id"), Required] int id)
         {
             _logger.LogInformation("Begin DeleteCropAsync");
 
             await _cropRepository.DeleteCropAsync(id);
 
             return NoContent();
+        }
+
+        // GET: api/crops/5/activities
+        /// <summary>
+        /// Gets the crop activities.
+        /// </summary>
+        /// <returns>IEnumerable&lt;Crop&gt;.</returns>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request</response>
+        [HttpGet("{id}/activities")]
+        [ActionName(nameof(GetCropActivitiesAsync))]
+        [ProducesResponseType(typeof(List<CropActivity>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> GetCropActivitiesAsync([FromRoute(Name = "id"), Required] int id)
+        {
+            _logger.LogInformation("Begin GetCropActivitiesAsync");
+
+            if (id == 0)
+            {
+                return BadRequest("The cropId is required.");
+            }
+
+            var cropActivityEntities = await _cropRepository.GetCropActivitiesAsync(id);
+
+            IList<CropActivity> crops = new List<CropActivity>();
+
+            if (cropActivityEntities != null)
+            {
+                // Map entities to dtos
+                crops = _mapper.Map<IList<CropActivity>>(cropActivityEntities);
+            }
+
+            return Ok(crops);
         }
     }
 }
