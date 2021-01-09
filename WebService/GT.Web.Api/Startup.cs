@@ -82,7 +82,7 @@ namespace GT.Web.Api
             {
                 opts.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "GardenTracker API",
+                    Title = "Garden Tracker API",
                     Version = "v1",
                     Description = "An API to perform GardenTracker operations",
                     TermsOfService = new Uri("https://www.blackhawkstudios.com/terms"),

@@ -131,6 +131,14 @@ namespace GT.Domain.Repositories
             }
         }
 
+        public async Task<IEnumerable<CropActivity>> GetCropActivitiesAsync(int id)
+        {
+            return await _context.CropActivities
+                .AsNoTracking()
+                .Where(x => x.CropId == id)
+                .ToListAsync();
+        }
+
         private bool CropExists(int id)
         {
             return _context.Crops.Any(e => e.CropId == id);

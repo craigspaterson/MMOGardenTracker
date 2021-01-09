@@ -47,5 +47,11 @@ namespace GT.Domain.Repositories.Interfaces
         /// <param name="id">The identifier.</param>
         /// <returns>Task.</returns>
         Task DeleteCropAsync(int id);
+
+        /// <summary>
+        /// Gets the crop activities asynchronous.
+        /// </summary>
+        /// <returns>Task&lt;IEnumerable&lt;CropActivity&gt;&gt;.</returns>
+        Task<IEnumerable<CropActivity>> GetCropActivitiesAsync(int id);
     }
 }
