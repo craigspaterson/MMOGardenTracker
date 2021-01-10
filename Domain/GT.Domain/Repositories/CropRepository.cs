@@ -28,6 +28,8 @@ namespace GT.Domain.Repositories
 
         public async Task<IEnumerable<Crop>> GetCropsAsync()
         {
+            _logger.LogInformation("Begin GetCropsAsync from CropRepository");
+
             return await _context.Crops
                 .AsNoTracking()
                 .ToListAsync();
@@ -35,7 +37,7 @@ namespace GT.Domain.Repositories
 
         public async Task<Crop> GetCropAsync(int id)
         {
-            _logger.LogInformation("Begin GetGardenAsync from GardenRepository");
+            _logger.LogInformation("Begin GetCropAsync from CropRepository");
 
             try
             {
@@ -133,6 +135,8 @@ namespace GT.Domain.Repositories
 
         public async Task<IEnumerable<CropActivity>> GetCropActivitiesAsync(int id)
         {
+            _logger.LogInformation("Begin GetCropActivitiesAsync from CropRepository");
+
             return await _context.CropActivities
                 .AsNoTracking()
                 .Where(x => x.CropId == id)

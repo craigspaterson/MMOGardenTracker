@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using CropEntity = GT.Domain.Models.Crop;
 
 namespace GT.Web.Api.Controllers
@@ -122,9 +121,9 @@ namespace GT.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> PutCropAsync([FromRoute(Name = "id"), Required] int id, [FromBody] Crop crop)
+        public async Task<IActionResult> PutCropAsync([FromRoute(Name = "id"), Required] int id, [FromBody][Required] Crop crop)
         {
-            _logger.LogInformation("Begin UpdateCropAsync");
+            _logger.LogInformation("Begin PutCropAsync");
 
             if (id != crop.CropId)
             {
@@ -158,9 +157,9 @@ namespace GT.Web.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> PostCropAsync([FromBody] Crop crop)
+        public async Task<IActionResult> PostCropAsync([FromBody][Required] Crop crop)
         {
-            _logger.LogInformation("Begin CreateCropAsync");
+            _logger.LogInformation("Begin PostCropAsync");
 
             CropEntity cropEntity = _mapper.Map<CropEntity>(crop);
 

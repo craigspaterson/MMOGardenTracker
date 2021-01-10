@@ -1,16 +1,17 @@
 ﻿using AutoMapper;
 using FluentAssertions;
+using GT.Domain.Repositories.Interfaces;
 using GT.Web.Api.Controllers;
 using GT.Web.Api.Mappings;
 using GT.Web.Api.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GT.Domain.Repositories.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using CropEntity = GT.Domain.Models.Crop;
 using GardenEntity = GT.Domain.Models.Garden;
 
@@ -21,6 +22,7 @@ namespace GT.UnitTests.WebApi.Controllers
     {
         private Mock<ILogger<GardensController>> _logger;
         private MapperConfiguration _mapperConfiguration;
+        private IMapper _mapper;
         private Mock<IGardenRepository> _gardenRepositoryMock;
 
         [TestInitialize]
@@ -28,6 +30,7 @@ namespace GT.UnitTests.WebApi.Controllers
         {
             _logger = new Mock<ILogger<GardensController>>();
             _mapperConfiguration = new MapperConfiguration(cfg => cfg.AddProfile<AutoMapperProfile>());
+            _mapper = new Mapper(_mapperConfiguration);
             _gardenRepositoryMock = new Mock<IGardenRepository>();
         }
 
@@ -59,19 +62,25 @@ namespace GT.UnitTests.WebApi.Controllers
                 }
             };
 
-            var mapper = new Mapper(_mapperConfiguration);
+            var gardenId = 1;
 
             _gardenRepositoryMock.Setup(r => r.GetGardensAsync()).ReturnsAsync(responseMock);
 
-            var controller = new GardensController(mapper, _logger.Object, _gardenRepositoryMock.Object);
+            var controller = new GardensController(_mapper, _logger.Object, _gardenRepositoryMock.Object);
 
             // Act
-            var actionResult = await controller.GetGardensAsync();
+            var result = await controller.GetGardensAsync() as ObjectResult;
+            var model = result?.Value;
 
             // Assert
-            actionResult.Should().NotBeNull();
-            actionResult.Should().BeOfType<List<Garden>>();
-            actionResult.Count.Should().Be(1);
+            result.Should().NotBeNull();
+            result.Should().BeOfType<OkObjectResult>();
+            result?.StatusCode.Should().Be(StatusCodes.Status200OK);
+
+            model.Should().NotBeNull();
+            model.Should().BeOfType<List<Garden>>();
+            model.As<List<Garden>>().Count.Should().Be(1);
+            model.As<List<Garden>>()[0].GardenId.Should().Be(gardenId);
         }
 
         #endregion

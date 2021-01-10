@@ -4,13 +4,14 @@ using GT.Domain.Repositories.Interfaces;
 using GT.Web.Api.Controllers;
 using GT.Web.Api.Mappings;
 using GT.Web.Api.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using CropActivityEntity = GT.Domain.Models.CropActivity;
 using CropEntity = GT.Domain.Models.Crop;
 
@@ -21,6 +22,7 @@ namespace GT.UnitTests.WebApi.Controllers
     {
         private Mock<ILogger<CropsController>> _logger;
         private MapperConfiguration _mapperConfiguration;
+        private IMapper _mapper;
         private Mock<ICropRepository> _cropRepositoryMock;
 
         [TestInitialize]
@@ -28,6 +30,7 @@ namespace GT.UnitTests.WebApi.Controllers
         {
             _logger = new Mock<ILogger<CropsController>>();
             _mapperConfiguration = new MapperConfiguration(cfg => cfg.AddProfile<AutoMapperProfile>());
+            _mapper = new Mapper(_mapperConfiguration);
             _cropRepositoryMock = new Mock<ICropRepository>();
         }
 
@@ -50,39 +53,71 @@ namespace GT.UnitTests.WebApi.Controllers
                     Notes = "Some Notes",
                     CropActivities = new List<CropActivityEntity>
                     {
-                        new CropActivityEntity{ActivityId = 1, ActivityDate = DateTimeOffset.UtcNow,CropId = 1, CropActivityId = 1}
+                        new CropActivityEntity{ActivityId = 1, ActivityDate = DateTimeOffset.UtcNow, CropId = 1, CropActivityId = 1}
                     }
                 }
             };
 
-            var mapper = new Mapper(_mapperConfiguration);
+            var cropId = 1;
 
             _cropRepositoryMock.Setup(r => r.GetCropsAsync()).ReturnsAsync(responseMock);
 
-            var controller = new CropsController(mapper, _logger.Object, _cropRepositoryMock.Object);
+            var controller = new CropsController(_mapper, _logger.Object, _cropRepositoryMock.Object);
 
             // Act
-            var actionResult = await controller.GetCropsAsync();
+            var result = await controller.GetCropsAsync() as ObjectResult;
+            var model = result?.Value;
 
             // Assert
-            actionResult.Should().NotBeNull();
-            actionResult.Should().BeOfType<OkObjectResult>();
-            var model = actionResult.As<List<Crop>>();
-            //model.Count.Should().Be(1);
-            //actionResult.Count.Should().Be(1);
+            result.Should().NotBeNull();
+            result.Should().BeOfType<OkObjectResult>();
+            result?.StatusCode.Should().Be(StatusCodes.Status200OK);
+
+            model.Should().NotBeNull();
+            model.Should().BeOfType<List<Crop>>();
+            model.As<List<Crop>>().Count.Should().Be(1);
+            model.As<List<Crop>>()[0].CropId.Should().Be(cropId);
         }
 
         #endregion
 
         [TestMethod]
-        public void GetCropAsyncTest()
+        public async Task GetCropAsyncTest()
         {
             // Arrange
+            CropEntity responseMock = new CropEntity
+            {
+                CropId = 1,
+                GardenId = 1,
+                CropName = "Garden1",
+                PlantName = "Plant1",
+                BeginDate = DateTimeOffset.UtcNow.AddDays(-1),
+                EndDate = null,
+                Notes = "Some Notes",
+                CropActivities = new List<CropActivityEntity>
+                {
+                    new CropActivityEntity{ActivityId = 1, ActivityDate = DateTimeOffset.UtcNow, CropId = 1, CropActivityId = 1}
+                }
+            };
+
+            var cropId = 1;
+
+            _cropRepositoryMock.Setup(r => r.GetCropAsync(cropId)).ReturnsAsync(responseMock);
+
+            var controller = new CropsController(_mapper, _logger.Object, _cropRepositoryMock.Object);
 
             // Act
-
-            // Assert
+            var result = await controller.GetCropAsync(cropId) as ObjectResult;
+            var model = result?.Value;
             
+            // Assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<OkObjectResult>();
+            result?.StatusCode.Should().Be(StatusCodes.Status200OK);
+
+            model.Should().NotBeNull();
+            model.Should().BeOfType<Crop>();
+            model.As<Crop>().CropId.Should().Be(cropId);
         }
 
         [TestMethod]
@@ -93,7 +128,7 @@ namespace GT.UnitTests.WebApi.Controllers
             // Act
 
             // Assert
-            
+
         }
 
         [TestMethod]
@@ -104,7 +139,7 @@ namespace GT.UnitTests.WebApi.Controllers
             // Act
 
             // Assert
-            
+
         }
 
         [TestMethod]
@@ -115,7 +150,7 @@ namespace GT.UnitTests.WebApi.Controllers
             // Act
 
             // Assert
-            
+
         }
     }
 }
