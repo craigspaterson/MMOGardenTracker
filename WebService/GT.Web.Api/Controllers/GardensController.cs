@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using GardenEntity = GT.Domain.Models.Garden;
 
@@ -44,9 +45,10 @@ namespace GT.Web.Api.Controllers
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
         [HttpGet]
+        [ActionName(nameof(GetGardensAsync))]
         [ProducesResponseType(typeof(List<Garden>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IList<Garden>> GetGardensAsync()
+        public async Task<IActionResult> GetGardensAsync()
         {
             _logger.LogInformation("Begin GetGardensAsync");
 
@@ -60,7 +62,7 @@ namespace GT.Web.Api.Controllers
                 gardens = _mapper.Map<IList<Garden>>(gardenEntities);
             }
 
-            return gardens;
+            return Ok(gardens);
         }
 
         // GET: api/Gardens/5
@@ -77,7 +79,7 @@ namespace GT.Web.Api.Controllers
         [ProducesResponseType(typeof(Garden), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetGardenAsync([FromRoute] int id)
+        public async Task<IActionResult> GetGardenAsync([FromRoute(Name = "id"), Required] int id)
         {
             _logger.LogInformation("Begin GetGardenAsync");
 
@@ -114,12 +116,13 @@ namespace GT.Web.Api.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>
         [HttpPut("{id}")]
+        [ActionName(nameof(PutGardenAsync))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> PutGardenAsync([FromRoute] int id, [FromBody] Garden garden)
+        public async Task<IActionResult> PutGardenAsync([FromRoute(Name = "id"), Required] int id, [FromBody][Required] Garden garden)
         {
             _logger.LogInformation("Begin UpdateGardenAsync");
 
@@ -150,11 +153,12 @@ namespace GT.Web.Api.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="409">Conflict</response>
         [HttpPost]
+        [ActionName(nameof(PostGardenAsync))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> PostGardenAsync([FromBody] Garden garden)
+        public async Task<IActionResult> PostGardenAsync([FromBody][Required] Garden garden)
         {
             _logger.LogInformation("Begin CreateGardenAsync");
 
@@ -176,11 +180,12 @@ namespace GT.Web.Api.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="404">Not Found</response>
         [HttpDelete("{id}")]
+        [ActionName(nameof(DeleteGardenAsync))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> DeleteGardenAsync([FromRoute] int id)
+        public async Task<IActionResult> DeleteGardenAsync([FromRoute(Name = "id"), Required] int id)
         {
             _logger.LogInformation("Begin DeleteGardenAsync");
 
