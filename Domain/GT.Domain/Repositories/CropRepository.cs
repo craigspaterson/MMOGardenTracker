@@ -70,11 +70,11 @@ namespace GT.Domain.Repositories
                 }
             }
 
+            //_context.Attach(crop).State = EntityState.Added;
+
+            //_context.ChangeTracker.TrackGraph(crop, x => x.Entry.State = EntityState.Added);
+
             await _context.Crops.AddAsync(crop);
-            //foreach (var cropCropActivity in crop.CropActivities)
-            //{
-            //    _context.ChangeTracker.TrackGraph(cropCropActivity, e => e.Entry.State = EntityState.Added);
-            //}
 
             try
             {
