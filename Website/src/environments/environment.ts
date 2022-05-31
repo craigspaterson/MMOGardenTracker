@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  gardenTrackerServiceUrl: 'https://localhost:44374/'
+  gardenTrackerServiceUrl: 'https://localhost:5001/'
+  // gardenTrackerServiceUrl: 'https://localhost:44374/'
 };
 
 // "applicationUrl": "http://localhost:64015",

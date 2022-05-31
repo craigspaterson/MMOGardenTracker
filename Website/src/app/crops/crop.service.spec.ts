@@ -17,9 +17,10 @@ describe('CropService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [CropService]
-    });
+    imports: [HttpClientTestingModule],
+    providers: [CropService],
+    teardown: { destroyAfterEach: false }
+});
 
     // Inject the http service and test controller for each test
     httpClient = TestBed.get(HttpClient);
