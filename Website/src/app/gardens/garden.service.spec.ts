@@ -9,9 +9,10 @@ import { GardenService } from './garden.service';
 describe('GardenService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [GardenService]
-    });
+    imports: [HttpClientTestingModule],
+    providers: [GardenService],
+    teardown: { destroyAfterEach: false }
+});
   });
 
   it('should be created', inject([GardenService], (service: GardenService) => {
