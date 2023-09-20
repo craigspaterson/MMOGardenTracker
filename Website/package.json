@@ -24,7 +24,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
-    "@ngtools/webpack": "^11.0.5",
+    "@ngtools/webpack": "^15.0.4",
     "bootstrap": "^4.5.3",
     "core-js": "^3.8.1",
     "jquery": "^3.5.1",
