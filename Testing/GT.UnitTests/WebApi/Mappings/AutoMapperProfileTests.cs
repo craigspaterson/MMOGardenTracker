@@ -47,7 +47,7 @@ namespace GT.UnitTests.WebApi.Mappings
             result.Should().NotBeNull();
             result.CropActivityId.Should().Be(cropActivityEntity.CropActivityId);
             result.CropId.Should().Be(cropActivityEntity.CropId);
-            result.ActivityType.Should().Be((int)Activities.Cloning);
+            result.ActivityType.Should().Be(Activities.Cloning);
             result.ActivityDate.Should().Be(cropActivityEntity.ActivityDate);
             result.Notes.Should().Be(cropActivityEntity.Notes);
         }
