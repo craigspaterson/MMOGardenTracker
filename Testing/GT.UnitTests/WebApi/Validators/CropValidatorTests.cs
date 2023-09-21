@@ -28,8 +28,8 @@ namespace GT.UnitTests.WebApi.Validators
                 CropId = 1,
                 CropName = "Garden1",
                 PlantName = "Plant1",
-                BeginDate = DateTimeOffset.UtcNow.AddDays(-1),
-                EndDate = DateTimeOffset.UtcNow.AddDays(1),
+                BeginDate = DateTime.UtcNow.AddDays(-1),
+                EndDate = DateTime.UtcNow.AddDays(1),
                 Notes = "Some Crop Notes",
                 CropActivities = new List<CropActivity>
                 {
@@ -38,7 +38,7 @@ namespace GT.UnitTests.WebApi.Validators
                         CropActivityId = 1,
                         CropId = 1,
                         ActivityType = Activities.Cloning,
-                        ActivityDate = DateTimeOffset.UtcNow,
+                        ActivityDate = DateTime.UtcNow,
                         Notes = "Some Crop Activity Notes"
                     }
                 }
@@ -69,8 +69,8 @@ namespace GT.UnitTests.WebApi.Validators
                 CropId = 1,
                 CropName = "Garden1",
                 PlantName = "Plant1",
-                BeginDate = DateTimeOffset.UtcNow,
-                EndDate = DateTimeOffset.UtcNow.AddDays(-1),
+                BeginDate = DateTime.UtcNow,
+                EndDate = DateTime.UtcNow.AddDays(-1),
                 Notes = "Some Crop Notes",
                 CropActivities = new List<CropActivity>
                 {
@@ -79,7 +79,7 @@ namespace GT.UnitTests.WebApi.Validators
                         CropActivityId = 1,
                         CropId = 1,
                         ActivityType = Activities.Cloning,
-                        ActivityDate = DateTimeOffset.UtcNow,
+                        ActivityDate = DateTime.UtcNow,
                         Notes = "Some Crop Activity Notes"
                     }
                 }
@@ -109,8 +109,8 @@ namespace GT.UnitTests.WebApi.Validators
                 CropId = 1,
                 CropName = "Garden1",
                 PlantName = "Plant1",
-                BeginDate = DateTimeOffset.UtcNow.AddDays(-1),
-                EndDate = DateTimeOffset.UtcNow,
+                BeginDate = DateTime.UtcNow.AddDays(-1),
+                EndDate = DateTime.UtcNow,
                 Notes = "Some Crop Notes",
                 CropActivities = new List<CropActivity>
                 {
@@ -119,7 +119,7 @@ namespace GT.UnitTests.WebApi.Validators
                         CropActivityId = 1,
                         CropId = 1,
                         ActivityType = Activities.Cloning,
-                        ActivityDate = DateTimeOffset.UtcNow.AddDays(-17),
+                        ActivityDate = DateTime.UtcNow.AddDays(-17),
                         Notes = "Some Crop Activity Notes"
                     }
                 }

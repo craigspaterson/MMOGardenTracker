@@ -69,8 +69,8 @@ namespace GT.Web.Api
 
             services.AddDbContextPool<GardenTrackerAppContext>(opts =>
             {
-                // opts.UseSqlServer(_configuration.GetConnectionString("GardenTrackerAppConnection"));
-                opts.UseNpgsql(_configuration.GetConnectionString("GardenTrackerAppConnection"));
+                opts.UseSqlServer(_configuration.GetConnectionString("GardenTrackerAppConnection"));
+                //opts.UseNpgsql(_configuration.GetConnectionString("GardenTrackerAppConnection"));
             });
 
             // Add Repositories
