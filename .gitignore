@@ -260,3 +260,5 @@ paket-files/
 __pycache__/
 *.pyc
 WebService/GT.Web.Api/C:/Projects/Workspace/Magenic/MMO/GardenTracker/WebService/GT.Web.Api/GT.Web.Api.xml
+.vscode/launch.json
+.vscode/tasks.json

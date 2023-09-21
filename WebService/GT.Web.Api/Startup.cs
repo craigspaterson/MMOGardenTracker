@@ -1,4 +1,5 @@
 using AutoMapper;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using GT.Domain;
 using GT.Web.Api.Configuration;
@@ -51,18 +52,16 @@ namespace GT.Web.Api
                 {
                     opts.Filters.Add(typeof(GlobalExceptionFilter));
                 })
-                .AddFluentValidation(opts =>
-                {
-                    opts.RegisterValidatorsFromAssemblyContaining<GardenValidator>(lifetime: ServiceLifetime.Singleton);
-                    opts.ImplicitlyValidateChildProperties = true;
-                })
-
                 .AddJsonOptions(opts =>
                 {
                     opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
                     opts.JsonSerializerOptions.WriteIndented = true;
                     opts.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                 });
+            // Add FluentValidation
+            services.AddFluentValidationAutoValidation();
+
+            services.AddValidatorsFromAssemblyContaining<GardenValidator>();
 
             // Add AutoMapper
             services.AddAutoMapper(typeof(Startup));

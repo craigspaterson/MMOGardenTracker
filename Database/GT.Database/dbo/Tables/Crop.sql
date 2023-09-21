@@ -1,4 +1,6 @@
-﻿CREATE TABLE [dbo].[Crop]
+﻿USE GardenTracker;
+
+CREATE TABLE [dbo].[Crop]
 (
     [CropId] INT IDENTITY (1, 1) NOT NULL, 
     [CropName] NVARCHAR(60) NOT NULL,
@@ -10,4 +12,4 @@
     CONSTRAINT [PK_Crop] PRIMARY KEY CLUSTERED ([CropId] ASC),
     CONSTRAINT [AK_CropName] UNIQUE NONCLUSTERED ([CropName] ASC),
     CONSTRAINT [FK_Crop_Garden] FOREIGN KEY ([GardenId]) REFERENCES [dbo].[Garden]([GardenId])
-)
+);

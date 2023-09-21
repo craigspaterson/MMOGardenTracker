@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  gardenTrackerServiceUrl: 'https://localhost:44374/'
+  gardenTrackerServiceUrl: 'https://localhost:5001/'
+  // gardenTrackerServiceUrl: 'https://localhost:44374/'
 };
 
 // "applicationUrl": "http://localhost:64015",
@@ -17,4 +18,4 @@ export const environment = {
  * import the following file, but please comment it out in production mode
  * because it will have performance impact when throw error
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
