@@ -1,6 +1,4 @@
-﻿USE GardenTracker;
-
-CREATE TABLE [dbo].[Crop]
+﻿CREATE TABLE [dbo].[Crop]
 (
     [CropId] INT IDENTITY (1, 1) NOT NULL, 
     [CropName] NVARCHAR(60) NOT NULL,

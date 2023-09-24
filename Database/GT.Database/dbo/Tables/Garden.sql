@@ -1,6 +1,4 @@
-﻿USE GardenTracker;
-
-CREATE TABLE [dbo].[Garden]
+﻿CREATE TABLE [dbo].[Garden]
 (
     [GardenId] INT IDENTITY (1, 1) NOT NULL, 
     [GardenName] NVARCHAR(60) NOT NULL,
