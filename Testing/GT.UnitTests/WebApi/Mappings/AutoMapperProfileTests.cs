@@ -16,7 +16,9 @@ namespace GT.UnitTests.WebApi.Mappings
         [TestInitialize]
         public void InitializeTest()
         {
-            _mapperConfiguration = new MapperConfiguration(cfg => cfg.AddProfile<AutoMapperProfile>());
+            var config = new MapperConfigurationExpression();
+            config.AddProfile<AutoMapperProfile>();
+            _mapperConfiguration = new MapperConfiguration(config);
         }
 
         [TestMethod]
