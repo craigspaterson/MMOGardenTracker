@@ -26,7 +26,9 @@ namespace GT.UnitTests.WebApi.Controllers
         public void InitializeTest()
         {
             _logger = new Mock<ILogger<GardensController>>();
-            _mapperConfiguration = new MapperConfiguration(cfg => cfg.AddProfile<AutoMapperProfile>());
+            var config = new MapperConfigurationExpression();
+            config.AddProfile<AutoMapperProfile>();
+            _mapperConfiguration = new MapperConfiguration(config);
             _gardenRepositoryMock = new Mock<IGardenRepository>();
         }
 
